@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d75dd5fdf4cbac141a405642bd979c5a, type: 3}
+  m_Name: Yemeni Presidential Assassinations
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: OnPlayActions
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[IExecutableAction, Assembly-CSharp]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  <Name>k__BackingField: Yemeni Presidential Assassinations
+  <Faction>k__BackingField: {fileID: 11400000, guid: 473e6aa7cc5aea040a6989a59af14c72, type: 2}
+  <Era>k__BackingField: 1
+  <Ops>k__BackingField:
+    baseValue: 2
+    name: 
+    modifiers: []
+  <RemovedEvent>k__BackingField: 1
+  <CardImage>k__BackingField: {fileID: 0}
+  <CardText>k__BackingField: 'Degrade the DEFCON level by 1. Roll a die, on a 4-6
+    add sufficient USSR Influence to Control Yemen. Add 1 to the die roll for each
+    USSR Controlled country in the Middle East. '
+  <CardFlavor>k__BackingField: 
+  revealed: 0

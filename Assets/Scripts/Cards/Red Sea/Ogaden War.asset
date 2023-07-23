@@ -1,0 +1,102 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d75dd5fdf4cbac141a405642bd979c5a, type: 3}
+  m_Name: Ogaden War
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: c1a508a4be259f449a4e6fe05906fafb, type: 2}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: OnPlayActions
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[IExecutableAction, Assembly-CSharp]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 1|TwilightStruggle.Cards.RedSea.OgadenWar, Assembly-CSharp
+    - Name: conditions
+      Entry: 7
+      Data: 2|System.Collections.Generic.List`1[[Condition, Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 3|EffectNotApplied, Assembly-CSharp
+    - Name: effect
+      Entry: 7
+      Data: 4|TwilightStruggle.Cards.RedSea.F35Es+F35EsEffect, Assembly-CSharp
+    - Name: name
+      Entry: 1
+      Data: F-5Es Delivered
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: ethiopia
+      Entry: 10
+      Data: 0
+    - Name: vpAward
+      Entry: 3
+      Data: 2
+    - Name: rollRequirement
+      Entry: 3
+      Data: 5
+    - Name: milOpsAward
+      Entry: 3
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  <Name>k__BackingField: Ogaden War
+  <Faction>k__BackingField: {fileID: 11400000, guid: 27f6c682b639abf42b3ec33f38895b19, type: 2}
+  <Era>k__BackingField: 1
+  <Ops>k__BackingField:
+    baseValue: 2
+    name: 
+    modifiers: []
+  <CardImage>k__BackingField: {fileID: 0}
+  <Effects>k__BackingField: []
+  <RemovedEvent>k__BackingField: 0
+  <CardText>k__BackingField: 'Somalia invades Ethiopia. Roll a die and subtract (-1)
+    for every USSR Controlled country adjacent to Ethiopia. On a modified roll of
+    5-6, the US receives 2 VPs and replaces all USSR Influence in Ethiopia with US
+    Influence.  The US adds 2 to its Military Operations. This Event canot be used
+    after the "#RS29 F-5Es Delivered" Event has been played. '
+  <CardFlavor>k__BackingField: 
+  revealed: 0
+  references:
+    version: 2
+    RefIds: []

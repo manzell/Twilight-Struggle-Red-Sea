@@ -1,0 +1,218 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d75dd5fdf4cbac141a405642bd979c5a, type: 3}
+  m_Name: Anti-Zionist Committee of the Soviet Public
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: c2427c7a309ea7a4f8296597a546b6d8, type: 2}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: OnPlayActions
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[IExecutableAction, Assembly-CSharp]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 1|Realign, Assembly-CSharp
+    - Name: conditions
+      Entry: 7
+      Data: 2|System.Collections.Generic.List`1[[Condition, Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: <targetRules>k__BackingField
+      Entry: 7
+      Data: 3|System.Collections.Generic.List`1[[Calculation`1[[System.Collections.Generic.List`1[[Country,
+        Assembly-CSharp]], mscorlib]], Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 4|CountriesInContinent, Assembly-CSharp
+    - Name: continent
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: <Modifiers>k__BackingField
+      Entry: 7
+      Data: 5|System.Collections.Generic.List`1[[Modifier, Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 6|Modifier, Assembly-CSharp
+    - Name: ModifierType
+      Entry: 3
+      Data: 0
+    - Name: source
+      Entry: 6
+      Data: 
+    - Name: Conditions
+      Entry: 7
+      Data: 7|System.Collections.Generic.List`1[[Condition, Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: value
+      Entry: 4
+      Data: 1
+    - Name: Name
+      Entry: 1
+      Data: Anti-Zionist Committee of the Soviet Public
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 8|Realign, Assembly-CSharp
+    - Name: conditions
+      Entry: 7
+      Data: 9|System.Collections.Generic.List`1[[Condition, Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: <targetRules>k__BackingField
+      Entry: 7
+      Data: 10|System.Collections.Generic.List`1[[Calculation`1[[System.Collections.Generic.List`1[[Country,
+        Assembly-CSharp]], mscorlib]], Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 11|CountriesInContinent, Assembly-CSharp
+    - Name: continent
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: <Modifiers>k__BackingField
+      Entry: 7
+      Data: 12|System.Collections.Generic.List`1[[Modifier, Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 13|Modifier, Assembly-CSharp
+    - Name: ModifierType
+      Entry: 3
+      Data: 0
+    - Name: source
+      Entry: 6
+      Data: 
+    - Name: Conditions
+      Entry: 7
+      Data: 14|System.Collections.Generic.List`1[[Condition, Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: value
+      Entry: 4
+      Data: 1
+    - Name: Name
+      Entry: 1
+      Data: Anti-Zionist Committee of the Soviet Public
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  <Name>k__BackingField: Anti-Zionist Committee of the Soviet Public
+  <Faction>k__BackingField: {fileID: 11400000, guid: 473e6aa7cc5aea040a6989a59af14c72, type: 2}
+  <Era>k__BackingField: 2
+  <Ops>k__BackingField:
+    baseValue: 2
+    name: 
+    modifiers: []
+  <CardImage>k__BackingField: {fileID: 0}
+  <Effects>k__BackingField: []
+  <RemovedEvent>k__BackingField: 1
+  <CardText>k__BackingField: 'Make 2 Realignment rolls in the Middle East with an
+    additional +1 modifier. '
+  <CardFlavor>k__BackingField: 
+  revealed: 0
+  references:
+    version: 2
+    RefIds: []

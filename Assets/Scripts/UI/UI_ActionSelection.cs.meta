@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 50134e93fad86444cbf861c36cecd51b
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - actionSelectionReceiverPrefab: {fileID: 5279180336586035498, guid: 655c921bb36dc1542b1ff186e1f6b3f5, type: 3}
+  - selectionWindow: {instanceID: 0}
+  - actionSelectionArea: {instanceID: 0}
+  - header: {instanceID: 0}
+  - headerBackground: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

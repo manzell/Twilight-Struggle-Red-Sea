@@ -1,0 +1,83 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d75dd5fdf4cbac141a405642bd979c5a, type: 3}
+  m_Name: Seychelles
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: 27f6c682b639abf42b3ec33f38895b19, type: 2}
+    - {fileID: 11400000, guid: c2427c7a309ea7a4f8296597a546b6d8, type: 2}
+    - {fileID: 11400000, guid: 894cf690185fda64ba5348d1bb3dbcac, type: 2}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: OnPlayActions
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[IExecutableAction, Assembly-CSharp]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 1|TwilightStruggle.Cards.RedSea.Seychelles, Assembly-CSharp
+    - Name: conditions
+      Entry: 7
+      Data: 2|System.Collections.Generic.List`1[[Condition, Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: US
+      Entry: 10
+      Data: 0
+    - Name: continent
+      Entry: 10
+      Data: 1
+    - Name: strategicSeaLanes
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  <Name>k__BackingField: Seychelles
+  <Faction>k__BackingField: {fileID: 11400000, guid: 473e6aa7cc5aea040a6989a59af14c72, type: 2}
+  <Era>k__BackingField: 2
+  <Ops>k__BackingField:
+    baseValue: 2
+    name: 
+    modifiers: []
+  <CardImage>k__BackingField: {fileID: 0}
+  <Effects>k__BackingField: []
+  <RemovedEvent>k__BackingField: 0
+  <CardText>k__BackingField: 'Add 1 USSR Influence to Strategic Sea Lanes for every
+    Middle Eastern country without US Influence. '
+  <CardFlavor>k__BackingField: 
+  revealed: 0
+  references:
+    version: 2
+    RefIds: []

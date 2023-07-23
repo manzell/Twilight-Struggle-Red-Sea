@@ -1,0 +1,2373 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18cdd5be0d13e7b4f864fbc753a493d6, type: 3}
+  m_Name: South Yemen
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 0}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: UpdateCountryEvent
+      Entry: 6
+      Data: 
+    - Name: InfluenceChangeEvent
+      Entry: 7
+      Data: 0|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: invocationList
+      Entry: 7
+      Data: 1|System.Delegate[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 62
+    - Name: 
+      Entry: 7
+      Data: 2|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 7
+      Data: 3|System.RuntimeType, mscorlib
+    - Name: 
+      Entry: 1
+      Data: UI_Country, Assembly-CSharp
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 7
+      Data: 4|System.RuntimeType, mscorlib
+    - Name: 
+      Entry: 1
+      Data: System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: signature
+      Entry: 7
+      Data: 5|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 6|System.RuntimeType, mscorlib
+    - Name: 
+      Entry: 1
+      Data: Faction, Assembly-CSharp
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 7|System.RuntimeType, mscorlib
+    - Name: 
+      Entry: 1
+      Data: System.Int32, mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 8|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 9|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 10|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 11|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 12|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 13|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 14|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 15|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 16|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 17|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 18|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 19|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 20|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 21|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 22|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 23|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 24|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 25|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 26|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 27|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 28|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 29|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 30|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 31|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 32|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 33|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 34|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 35|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 36|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 37|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 38|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 39|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 40|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 41|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 42|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 43|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 44|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 45|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 46|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 47|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 48|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 49|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 50|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 51|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 52|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 53|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 54|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 55|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 56|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 57|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 58|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 59|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 60|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 61|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 62|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 63|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 64|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 65|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 66|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 67|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 68|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 69|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 70|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 71|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 72|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 73|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 74|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 75|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 76|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 77|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 78|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 79|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 80|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 81|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 82|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 83|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 84|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 85|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 86|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 87|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 88|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 89|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 90|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 91|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 92|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 93|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 94|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 95|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 96|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 97|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 98|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 99|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 100|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 101|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 102|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 103|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 104|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 105|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 106|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 107|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 108|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 109|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 110|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 111|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 112|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 113|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 114|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 115|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 116|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 117|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 118|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 119|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 120|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 121|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 122|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 123|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 124|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 125|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 126|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 127|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 128|System.Action`2[[Faction, Assembly-CSharp],[System.Int32, mscorlib]],
+        mscorlib
+    - Name: target
+      Entry: 10
+      Data: 0
+    - Name: declaringType
+      Entry: 9
+      Data: 3
+    - Name: methodName
+      Entry: 1
+      Data: UpdateInfluence
+    - Name: delegateType
+      Entry: 9
+      Data: 4
+    - Name: signature
+      Entry: 7
+      Data: 129|System.Type[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 9
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  Stability: 1
+  <Battleground>k__BackingField: 0
+  <Flashpoint>k__BackingField: 0
+  <Continents>k__BackingField:
+  - {fileID: 11400000, guid: c2427c7a309ea7a4f8296597a546b6d8, type: 2}
+  <Neighbors>k__BackingField:
+  - {fileID: 11400000, guid: e2a9dc28ca9d2c744be49037f32cb53b, type: 2}
+  - {fileID: 11400000, guid: b660eb442a1b6154fb7c5fd7a81a3a64, type: 2}

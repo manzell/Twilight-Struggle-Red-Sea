@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d75dd5fdf4cbac141a405642bd979c5a, type: 3}
+  m_Name: OAU
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 9204380845720857485, guid: 6f6ca6b4a8803044aa8e2b179cd6c080, type: 3}
+    - {fileID: 5279180336586035498, guid: 655c921bb36dc1542b1ff186e1f6b3f5, type: 3}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: OnPlayActions
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[IExecutableAction, Assembly-CSharp]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 1|TwilightStruggle.Cards.RedSea.OAU, Assembly-CSharp
+    - Name: conditions
+      Entry: 7
+      Data: 2|System.Collections.Generic.List`1[[Condition, Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: actionSelectionPrefab
+      Entry: 10
+      Data: 0
+    - Name: actionReceiverPrefab
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  <Name>k__BackingField: OAU
+  <Faction>k__BackingField: {fileID: 0}
+  <Era>k__BackingField: 2
+  <Ops>k__BackingField:
+    baseValue: 1
+    name: 
+    modifiers: []
+  <CardImage>k__BackingField: {fileID: 0}
+  <Effects>k__BackingField: []
+  <RemovedEvent>k__BackingField: 0
+  <CardText>k__BackingField: Discard an Event card associated with your opponent
+    and roll a die. Roll 4-6, use the discarded card's Operations value this Action
+    Round. Roll 1-3, conduct no Operations this Action Round.
+  <CardFlavor>k__BackingField: 
+  revealed: 0
+  references:
+    version: 2
+    RefIds: []

@@ -1,0 +1,89 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d75dd5fdf4cbac141a405642bd979c5a, type: 3}
+  m_Name: Daniel Arap Moi
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: fadb6213dbead864f9fca1c09f036843, type: 2}
+    - {fileID: 9204380845720857485, guid: 6f6ca6b4a8803044aa8e2b179cd6c080, type: 3}
+    - {fileID: 5279180336586035498, guid: 655c921bb36dc1542b1ff186e1f6b3f5, type: 3}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: OnPlayActions
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[IExecutableAction, Assembly-CSharp]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 1|TwilightStruggle.Cards.RedSea.DanielArapMoi, Assembly-CSharp
+    - Name: conditions
+      Entry: 7
+      Data: 2|System.Collections.Generic.List`1[[Condition, Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: kenya
+      Entry: 10
+      Data: 0
+    - Name: controlVPAward
+      Entry: 3
+      Data: 1
+    - Name: altAward
+      Entry: 3
+      Data: 2
+    - Name: actionSelection
+      Entry: 10
+      Data: 1
+    - Name: selectionReceiver
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  <Name>k__BackingField: Daniel Arap Moi
+  <Faction>k__BackingField: {fileID: 11400000, guid: 27f6c682b639abf42b3ec33f38895b19, type: 2}
+  <Era>k__BackingField: 2
+  <Ops>k__BackingField:
+    baseValue: 2
+    name: 
+    modifiers: []
+  <CardImage>k__BackingField: {fileID: 0}
+  <Effects>k__BackingField: []
+  <RemovedEvent>k__BackingField: 1
+  <CardText>k__BackingField: 'If the US controls Kenya, 1 VP and improve or degrade
+    DEFCON 1 space. Otherwise add 2 US Influence in Kenya. '
+  <CardFlavor>k__BackingField: 
+  revealed: 0
+  references:
+    version: 2
+    RefIds: []

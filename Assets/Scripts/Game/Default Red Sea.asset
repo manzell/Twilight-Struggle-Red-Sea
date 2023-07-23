@@ -1,0 +1,813 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75235b75dc7d5e545b17ffb014d3c5b2, type: 3}
+  m_Name: Default Red Sea
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: 473e6aa7cc5aea040a6989a59af14c72, type: 2}
+    - {fileID: 11400000, guid: b660eb442a1b6154fb7c5fd7a81a3a64, type: 2}
+    - {fileID: 11400000, guid: 43de9499c9f0b2b40996f62e40977959, type: 2}
+    - {fileID: 11400000, guid: c1a508a4be259f449a4e6fe05906fafb, type: 2}
+    - {fileID: 11400000, guid: fadb6213dbead864f9fca1c09f036843, type: 2}
+    - {fileID: 11400000, guid: 16ff6a03443bb19448a09da64f730619, type: 2}
+    - {fileID: 11400000, guid: 0551faaed92380d4d9d4631eed80a495, type: 2}
+    - {fileID: 11400000, guid: e2a9dc28ca9d2c744be49037f32cb53b, type: 2}
+    - {fileID: 11400000, guid: aa6f92c522983a64881763d41b011e68, type: 2}
+    - {fileID: 11400000, guid: 953c324e2ece98d4aaa1ce725ebe4a7b, type: 2}
+    - {fileID: 11400000, guid: 894cf690185fda64ba5348d1bb3dbcac, type: 2}
+    - {fileID: 11400000, guid: 3dcba67bc1120f24eaa6596989e21b59, type: 2}
+    - {fileID: 11400000, guid: 2cc3352f3f11b3a4982d5cec4b26c2f8, type: 2}
+    - {fileID: 11400000, guid: 27f6c682b639abf42b3ec33f38895b19, type: 2}
+    - {fileID: 11400000, guid: f56b5e874718a374683c50de1f516eee, type: 2}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: influence
+      Entry: 7
+      Data: 0|System.Collections.Generic.Dictionary`2[[GameState+AdjustInfluence+FactionCountry,
+        Assembly-CSharp],[System.Int32, mscorlib]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 1|System.Collections.Generic.ObjectEqualityComparer`1[[GameState+AdjustInfluence+FactionCountry,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 24
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 7
+      Data: GameState+AdjustInfluence+FactionCountry, Assembly-CSharp
+    - Name: faction
+      Entry: 10
+      Data: 0
+    - Name: country
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: $v
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 7
+      Data: GameState+AdjustInfluence+FactionCountry, Assembly-CSharp
+    - Name: faction
+      Entry: 10
+      Data: 0
+    - Name: country
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: $v
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 7
+      Data: GameState+AdjustInfluence+FactionCountry, Assembly-CSharp
+    - Name: faction
+      Entry: 10
+      Data: 0
+    - Name: country
+      Entry: 10
+      Data: 3
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: $v
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 7
+      Data: GameState+AdjustInfluence+FactionCountry, Assembly-CSharp
+    - Name: faction
+      Entry: 10
+      Data: 0
+    - Name: country
+      Entry: 10
+      Data: 4
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: $v
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 7
+      Data: GameState+AdjustInfluence+FactionCountry, Assembly-CSharp
+    - Name: faction
+      Entry: 10
+      Data: 0
+    - Name: country
+      Entry: 10
+      Data: 5
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: $v
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 7
+      Data: GameState+AdjustInfluence+FactionCountry, Assembly-CSharp
+    - Name: faction
+      Entry: 10
+      Data: 0
+    - Name: country
+      Entry: 10
+      Data: 6
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: $v
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 7
+      Data: GameState+AdjustInfluence+FactionCountry, Assembly-CSharp
+    - Name: faction
+      Entry: 10
+      Data: 0
+    - Name: country
+      Entry: 10
+      Data: 7
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: $v
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 7
+      Data: GameState+AdjustInfluence+FactionCountry, Assembly-CSharp
+    - Name: faction
+      Entry: 10
+      Data: 0
+    - Name: country
+      Entry: 10
+      Data: 8
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: $v
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 7
+      Data: GameState+AdjustInfluence+FactionCountry, Assembly-CSharp
+    - Name: faction
+      Entry: 10
+      Data: 0
+    - Name: country
+      Entry: 10
+      Data: 9
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: $v
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 7
+      Data: GameState+AdjustInfluence+FactionCountry, Assembly-CSharp
+    - Name: faction
+      Entry: 10
+      Data: 0
+    - Name: country
+      Entry: 10
+      Data: 10
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: $v
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 7
+      Data: GameState+AdjustInfluence+FactionCountry, Assembly-CSharp
+    - Name: faction
+      Entry: 10
+      Data: 0
+    - Name: country
+      Entry: 10
+      Data: 11
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: $v
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 7
+      Data: GameState+AdjustInfluence+FactionCountry, Assembly-CSharp
+    - Name: faction
+      Entry: 10
+      Data: 0
+    - Name: country
+      Entry: 10
+      Data: 12
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: $v
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 7
+      Data: GameState+AdjustInfluence+FactionCountry, Assembly-CSharp
+    - Name: faction
+      Entry: 10
+      Data: 13
+    - Name: country
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: $v
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 7
+      Data: GameState+AdjustInfluence+FactionCountry, Assembly-CSharp
+    - Name: faction
+      Entry: 10
+      Data: 13
+    - Name: country
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: $v
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 7
+      Data: GameState+AdjustInfluence+FactionCountry, Assembly-CSharp
+    - Name: faction
+      Entry: 10
+      Data: 13
+    - Name: country
+      Entry: 10
+      Data: 3
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: $v
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 7
+      Data: GameState+AdjustInfluence+FactionCountry, Assembly-CSharp
+    - Name: faction
+      Entry: 10
+      Data: 13
+    - Name: country
+      Entry: 10
+      Data: 4
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: $v
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 7
+      Data: GameState+AdjustInfluence+FactionCountry, Assembly-CSharp
+    - Name: faction
+      Entry: 10
+      Data: 13
+    - Name: country
+      Entry: 10
+      Data: 5
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: $v
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 7
+      Data: GameState+AdjustInfluence+FactionCountry, Assembly-CSharp
+    - Name: faction
+      Entry: 10
+      Data: 13
+    - Name: country
+      Entry: 10
+      Data: 6
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: $v
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 7
+      Data: GameState+AdjustInfluence+FactionCountry, Assembly-CSharp
+    - Name: faction
+      Entry: 10
+      Data: 13
+    - Name: country
+      Entry: 10
+      Data: 7
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: $v
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 7
+      Data: GameState+AdjustInfluence+FactionCountry, Assembly-CSharp
+    - Name: faction
+      Entry: 10
+      Data: 13
+    - Name: country
+      Entry: 10
+      Data: 8
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: $v
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 7
+      Data: GameState+AdjustInfluence+FactionCountry, Assembly-CSharp
+    - Name: faction
+      Entry: 10
+      Data: 13
+    - Name: country
+      Entry: 10
+      Data: 9
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: $v
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 7
+      Data: GameState+AdjustInfluence+FactionCountry, Assembly-CSharp
+    - Name: faction
+      Entry: 10
+      Data: 13
+    - Name: country
+      Entry: 10
+      Data: 10
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: $v
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 7
+      Data: GameState+AdjustInfluence+FactionCountry, Assembly-CSharp
+    - Name: faction
+      Entry: 10
+      Data: 13
+    - Name: country
+      Entry: 10
+      Data: 11
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: $v
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 7
+      Data: GameState+AdjustInfluence+FactionCountry, Assembly-CSharp
+    - Name: faction
+      Entry: 10
+      Data: 13
+    - Name: country
+      Entry: 10
+      Data: 12
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: $v
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: <hands>k__BackingField
+      Entry: 7
+      Data: 2|System.Collections.Generic.Dictionary`2[[Faction, Assembly-CSharp],[System.Collections.Generic.List`1[[Card,
+        Assembly-CSharp]], mscorlib]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 3|System.Collections.Generic.ObjectEqualityComparer`1[[Faction, Assembly-CSharp]],
+        mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 10
+      Data: 0
+    - Name: $v
+      Entry: 7
+      Data: 4|System.Collections.Generic.List`1[[Card, Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 10
+      Data: 13
+    - Name: $v
+      Entry: 7
+      Data: 5|System.Collections.Generic.List`1[[Card, Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: <PermanentCards>k__BackingField
+      Entry: 7
+      Data: 6|System.Collections.Generic.Dictionary`2[[Card, Assembly-CSharp],[System.ValueTuple`2[[Faction,
+        Assembly-CSharp],[System.Boolean, mscorlib]], mscorlib]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 7|System.Collections.Generic.ObjectEqualityComparer`1[[Card, Assembly-CSharp]],
+        mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 10
+      Data: 14
+    - Name: $v
+      Entry: 7
+      Data: System.ValueTuple`2[[Faction, Assembly-CSharp],[System.Boolean, mscorlib]],
+        mscorlib
+    - Name: Item1
+      Entry: 10
+      Data: 13
+    - Name: Item2
+      Entry: 5
+      Data: true
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: <discards>k__BackingField
+      Entry: 7
+      Data: 8|System.Collections.Generic.HashSet`1[[Card, Assembly-CSharp]], System.Core
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: <removed>k__BackingField
+      Entry: 7
+      Data: 9|System.Collections.Generic.HashSet`1[[Card, Assembly-CSharp]], System.Core
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: <effects>k__BackingField
+      Entry: 7
+      Data: 10|System.Collections.Generic.HashSet`1[[Effect, Assembly-CSharp]], System.Core
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: vps
+      Entry: 7
+      Data: 11|System.Collections.Generic.Dictionary`2[[Faction, Assembly-CSharp],[System.Int32,
+        mscorlib]], mscorlib
+    - Name: comparer
+      Entry: 9
+      Data: 3
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 10
+      Data: 0
+    - Name: $v
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 10
+      Data: 13
+    - Name: $v
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: <milOps>k__BackingField
+      Entry: 7
+      Data: 12|System.Collections.Generic.Dictionary`2[[Faction, Assembly-CSharp],[System.Int32,
+        mscorlib]], mscorlib
+    - Name: comparer
+      Entry: 9
+      Data: 3
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 10
+      Data: 0
+    - Name: $v
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 10
+      Data: 13
+    - Name: $v
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: <ExecutedActions>k__BackingField
+      Entry: 7
+      Data: 13|System.Collections.Generic.List`1[[IExecutableAction, Assembly-CSharp]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: <SpaceRaceItems>k__BackingField
+      Entry: 7
+      Data: 14|System.Collections.Generic.List`1[[SpaceStage, Assembly-CSharp]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  <Turns>k__BackingField:
+  - {fileID: 0}
+  <deck>k__BackingField: []
+  <defcon>k__BackingField: 4
+  <phasingFaction>k__BackingField: {fileID: 11400000, guid: 27f6c682b639abf42b3ec33f38895b19, type: 2}

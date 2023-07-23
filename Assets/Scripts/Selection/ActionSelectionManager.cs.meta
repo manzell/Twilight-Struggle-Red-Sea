@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 1405e7555a914d84982d9e5364b092bd
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - actionRoundPromptBox: {instanceID: 0}
+  - actionSelectionArea: {instanceID: 0}
+  - actionSelectionPrefab: {fileID: 5279180336586035498, guid: 655c921bb36dc1542b1ff186e1f6b3f5, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
