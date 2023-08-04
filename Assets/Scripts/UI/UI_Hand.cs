@@ -2,118 +2,113 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using DG.Tweening;
+using Sirenix.OdinInspector; 
 
-public class UI_Hand : MonoBehaviour
-{
+public class UI_Hand : SerializedMonoBehaviour
+{    
     [SerializeField] UI_Card cardPrefab;
-    [SerializeField] GameObject unknownCardPrefab;
     [SerializeField] Faction faction;
     [SerializeField] float overlap;
     [SerializeField] float speed;
 
-    List<Card> hand = new(); 
-    Dictionary<Card, UI_Card> UIs = new();
+    public int sign => transform.position.x > (Screen.width / 2) ? 1 : -1;
+    bool handChanged; 
 
-    int sign => transform.position.x > (Screen.width / 2) ? 1 : -1;
+    public Dictionary<Card, CardHandData> hand = new(); 
 
-    private void Awake()
+    public class CardHandData
     {
-        UI_Game.SetActivePlayerEvent += OnSetActivePlayer;
-        faction.AddCardEvent += AddCardToHand;
-        faction.LoseCardEvent += RemoveCardFromHand;
+        public enum CardHandRole { None, Space, Hold, Event, Ops, Coup, Realign }
+        public CardHandRole role;
+        public int index;
+        public bool revealed;
+        public bool drag;
+        public Tween tween;
+        public UI_Card UI; 
     }
 
     private void Update()
     {
-        PositionCards(); 
+        if (handChanged)
+            PositionCards(); 
+    }
+
+    private void Awake()
+    {
+        UI_Game.SetActivePlayerEvent += OnSetActivePlayer;
+        UI_Card.OnCardDragStart += ui => PositionCards();
+        UI_Card.OnCardDragEnd += ui => PositionCards(); 
+
+        faction.AddCardEvent += AddCardToHand;
+        faction.RemoveCardEvent += RemoveCardFromHand;
+
+        hand = new();
     }
 
     public void OnSetActivePlayer(Faction faction)
     {
-        hand = new();
-        UIs = new();
+        Debug.Log($"OnSetActivePlayer: Creating 2 Tweens for each of {this.faction.name}'s {hand.Keys.Count(card => !hand[card].drag)} cards");
 
-        foreach (Transform t in transform)
-            Destroy(t.gameObject); 
+        foreach(Card card in hand.Keys.Where(card => !hand[card].drag))
+        {
+            hand[card].UI.transform.DORotate(new Vector3(0, faction == this.faction ? 0 : 180f, 0), 1f);
 
-        foreach (Card card in this.faction.Hand)
-            AddCardToHand(card); 
+            DOTween.Sequence().SetDelay(.35f).OnComplete(() => {
+                hand[card].UI.SetDisplay(faction == this.faction);
+                hand[card].UI.GetComponent<RectTransform>().localScale = new(faction == this.faction ? 1 : -1 * hand[card].UI.GetComponent<RectTransform>().localScale.x, 1, 1);
+            });
+        }
     }
 
     public void AddCardToHand(Card card)
     {
-        if(UI_Game.ActiveFaction == faction)
-        {
-            UI_Card uiCard = Instantiate(cardPrefab, transform);
-            uiCard.Setup(card);
-            uiCard.name = card.Name;
+        UI_Card uiCard = Instantiate(cardPrefab, transform);
+        CardHandData handData = new();
 
-            AddCardToHand(uiCard); 
-        }
-        else
-        {
-            GameObject instancedCard = Instantiate(unknownCardPrefab, transform);
-            instancedCard.name = $"Unknown {faction.name} Card";
-        }
-    }
+        uiCard.name = card.Name;
+        uiCard.gameObject.AddComponent<UI_DraggableCard>();
+        uiCard.Setup(card); 
 
-    public void AddCardToHand(UI_Card uiCard)
-    {
-        int index = sign == 1 ?
-            UIs.Values.Count(ui => ui.transform.position.x < uiCard.transform.position.x) :
-            UIs.Values.Count(ui => ui.transform.position.x > uiCard.transform.position.x);
+        handData.index = hand.Count;
+        handData.UI = uiCard; 
+        handChanged = true;
 
-        uiCard.transform.SetParent(transform);
-        uiCard.transform.SetSiblingIndex(index); 
-        UIs.Add(uiCard.Card, uiCard);
-        hand.Insert(index, uiCard.Card);
+        hand.Add(card, handData);
+        handData.UI.transform.SetParent(transform);
+        handData.UI.SetDisplay(UI_Game.ActiveFaction == faction);
     }
 
     public void RemoveCardFromHand(Card card)
     {
-        if (UIs.TryGetValue(card, out UI_Card uiCard))
-        {
-            RemoveCardFromHand(uiCard); 
-            Destroy(uiCard.gameObject);
-        }
+        hand[card].tween.Kill();
+
+        if (hand.Remove(card))
+            handChanged = true;
+
+        foreach (Card _card in hand.Keys)
+            hand[_card].index = hand.Values.Count(chd => chd.index < hand[_card].index);
     }
 
-    public void RemoveCardFromHand(UI_Card uiCard)
+    public void PositionCards()
     {
-        if(uiCard.transform.IsChildOf(this.transform))
+        List<Card> cards = hand.Keys.Where(card => hand[card].drag == false).ToList();
+
+        foreach(Card card in cards)
         {
-            // instead of destroying the card, we pop it out of our Hand. Then whatever happens, happens. 
-            uiCard.transform.SetParent(transform.parent);
+            float previousWidth = cards.Where(_card => hand[_card].index < hand[card].index)
+                .Sum(_card => hand[_card].UI.GetComponent<RectTransform>().sizeDelta.x - overlap);
 
-            UIs.Remove(uiCard.Card);
-            hand.Remove(uiCard.Card);
+            if (hand[card].tween != null)
+                hand[card].tween.Kill();
+
+            hand[card].UI.transform.SetSiblingIndex(hand.Keys.OrderBy(_card => hand[_card].index).ToList().IndexOf(card)); 
+
+            hand[card].tween = hand[card].UI.transform.DOLocalMove(new Vector3(sign * (previousWidth + hand[card].UI.GetComponent<RectTransform>().sizeDelta.x / 2), 0, 0), speed)
+                .SetEase(Ease.InOutSine)
+                .SetSpeedBased(true);
         }
-    }
 
-    void PositionCards()
-    {
-        foreach (Transform t in transform)
-        {
-            int index = 0;
-            float previousWidth = 0f;
-            float distance = Time.deltaTime * speed; 
-
-            if(UI_Game.ActiveFaction == faction && t.TryGetComponent(out IDraggableCard uiCard))
-            {
-                index = Mathf.Max(index, hand.IndexOf(uiCard.Card));
-                previousWidth = hand.GetRange(0, index).Sum(card => UIs[card].GetComponent<RectTransform>().sizeDelta.x);
-            }
-            else
-            {
-                index = Mathf.Max(index, t.GetSiblingIndex());
-                previousWidth = transform.children().Where(_t => _t.GetSiblingIndex() < index).Sum(_t => _t.GetComponent<RectTransform>().sizeDelta.x);
-            }
-
-            Vector3 destination = new((previousWidth + (t.GetComponent<RectTransform>().sizeDelta.x / 2) - (overlap * index)) * sign, 0, 0);
-            Vector3 waypoint = Vector3.Lerp(t.localPosition, destination, Mathf.Min(distance, 1));
-
-            //t.SetSiblingIndex(sign == 1 ? index : transform.childCount - index);
-            t.SetLocalPositionAndRotation(waypoint, Quaternion.identity);
-        }
+        handChanged = false; 
     }
 }

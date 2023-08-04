@@ -37,12 +37,12 @@ public class GameState : SerializedScriptableObject
     [field: SerializeField] public List<SpaceStage> SpaceRaceItems { get; private set; }
 
     public List<Card> Hand(Faction faction) => hands[faction];
-    public HashSet<Country> Countries => new(influence.Keys.Select(fc => fc.country));
+    public HashSet<CountryData> Countries => new(influence.Keys.Select(fc => fc.country));
 
-    public Dictionary<Faction, int> Influence(Country country) => influence.Where(fc => fc.Key.country == country).ToDictionary(fc => fc.Key.faction, fc => fc.Value);
-    public Dictionary<Country, int> Influence(Faction faction) => influence.Where(fc => fc.Key.faction == faction).ToDictionary(fc => fc.Key.country, fc => fc.Value);
+    public Dictionary<Faction, int> Influence(CountryData country) => influence.Where(fc => fc.Key.country == country).ToDictionary(fc => fc.Key.faction, fc => fc.Value);
+    public Dictionary<CountryData, int> Influence(Faction faction) => influence.Where(fc => fc.Key.faction == faction).ToDictionary(fc => fc.Key.country, fc => fc.Value);
 
-    public void RefreshInfluence()
+    /* public void RefreshInfluence()
     {
         Dictionary<AdjustInfluence.FactionCountry, int> _influence = new(); 
 
@@ -51,6 +51,7 @@ public class GameState : SerializedScriptableObject
 
         influence = _influence; 
     }
+    */
     public void SetPlayerHand(Faction faction, IEnumerable<Card> hand) => hands[faction] = new(hand);
 
     [System.Serializable]
@@ -178,7 +179,6 @@ public class GameState : SerializedScriptableObject
 
             if (destinationMilOps != previousMilOps)
             {
-                Debug.Log($"Triggering Adjust MilOps Event for {destinationMilOps} {faction.name}");
                 Game.current.gameState.milOps[faction] = destinationMilOps;
                 Game.AdjustMilOpsEvent?.Invoke(faction, destinationMilOps - previousMilOps); 
             }
@@ -243,29 +243,29 @@ public class GameState : SerializedScriptableObject
         Dictionary<FactionCountry, int> previousInfluence;
 
         public AdjustInfluence(FactionCountry factionCountry, int influenceAmount) =>
-            infChange = new Dictionary<FactionCountry, int>() { {factionCountry, influenceAmount }}; 
+            infChange = new Dictionary<FactionCountry, int>() { { factionCountry, influenceAmount } }; 
 
-        public AdjustInfluence(Faction faction, Country country, int amount) => 
+        public AdjustInfluence(Faction faction, CountryData country, int amount) => 
             infChange = new Dictionary<FactionCountry, int>() { { new FactionCountry(faction, country), amount } };
 
         public override void Undo()
         {
-            Game.current.gameState.influence = previousInfluence;
+            Game.currentState.influence = previousInfluence;
         }
 
         public override void Do()
         {
-            previousInfluence = Game.current.gameState.influence;
+            previousInfluence = Game.currentState.influence;
 
             foreach (FactionCountry kvp in infChange.Keys)
             {
-                int currentInfluence = Game.current.gameState.Influence(kvp.country)[kvp.faction];
+                int currentInfluence = Game.currentState.Influence(kvp.country)[kvp.faction];
                 int newInfluence = Mathf.Max(currentInfluence + infChange[kvp], 0);
                 
                 if(currentInfluence != newInfluence)
                 {
                     Debug.Log($"{(infChange[kvp] < 0 ? string.Empty : "+")}{infChange[kvp]} {kvp.faction.name} Influence in {kvp.country}");
-                    Game.current.gameState.influence[kvp] = newInfluence;
+                    Game.currentState.influence[kvp] = newInfluence;
                     kvp.country.InfluenceChangeEvent?.Invoke(kvp.faction, newInfluence - currentInfluence);
                 }
             }
@@ -275,9 +275,9 @@ public class GameState : SerializedScriptableObject
         public struct FactionCountry : IComparer<Faction>
         {
             public Faction faction;
-            public Country country;
+            public CountryData country;
 
-            public FactionCountry(Faction faction, Country country)
+            public FactionCountry(Faction faction, CountryData country)
             {
                 this.faction = faction;
                 this.country = country; 
@@ -406,7 +406,7 @@ public class GameState : SerializedScriptableObject
                 else
                     card = Game.currentState.deck.FirstOrDefault(c => c.Name == card.Name) ?? Instantiate(card); 
 
-                Debug.Log($"{card.Name} dealt to {faction.name}");
+                //Debug.Log($"{card.Name} dealt to {faction.name}");
 
                 Game.currentState.deck.Remove(card);
                 Game.currentState.hands[faction].Add(card);
@@ -487,7 +487,7 @@ public class GameState : SerializedScriptableObject
             if (Game.current.gameState.hands[faction].Remove(card))
             {
                 Debug.Log($"{card} removed from {faction} hand");
-                faction.LoseCardEvent?.Invoke(card);
+                faction.RemoveCardEvent?.Invoke(card);
             }
         }
 
@@ -600,9 +600,9 @@ public class GameState : SerializedScriptableObject
     public class InfluenceForControl : StateChange
     {
         [SerializeField] Faction faction;
-        [SerializeField] Country country; 
+        [SerializeField] CountryData country; 
 
-        public InfluenceForControl(Faction faction, Country country)
+        public InfluenceForControl(Faction faction, CountryData country)
         {
             this.faction = faction;
             this.country = country;
@@ -619,10 +619,10 @@ public class GameState : SerializedScriptableObject
 
     public class SetStability : StateChange
     {
-        [SerializeField] Country country;
+        [SerializeField] CountryData country;
         [SerializeField] int stability; 
 
-        public SetStability(Country country, int stability)
+        public SetStability(CountryData country, int stability)
         {
             this.country = country;
             this.stability = stability;

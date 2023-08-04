@@ -4,12 +4,16 @@ using UnityEngine;
 using System.Linq;
 using System.Threading.Tasks; 
 
-public class PlayCard : GameAction
+public class PlayCard : GameAction, ICardAction
 {
-    Faction faction;
-    Card card; 
+    public Card card { get; private set; }
+    public TaskCompletionSource<PlayCard> completion { get; private set; }
 
-    public PlayCard(Faction faction) => this.faction = faction;
+    public Card Card => card;
+
+    public static System.Action<PlayCard> StartPlayCardEvent, FinishPlayCardEvent; 
+
+    public PlayCard(Faction faction) => SetActingFaction(faction);
     public PlayCard(Faction faction, Card card) : this(faction) => this.card = card; 
     public PlayCard(KeyValuePair<Faction, Card> kvp) : this(kvp.Key, kvp.Value) { }
 
@@ -18,21 +22,23 @@ public class PlayCard : GameAction
         this.card = card; 
     }
 
-    public override void Undo()
-    {
-        throw new System.NotImplementedException();
-    }
-
     protected override async Task Do()
     {
-        Debug.Log($"{faction.name} plays {card.Name}");
-        await card.Execute(faction);
+        Debug.Log($"{ActingFaction.name} plays {card.Name} [{card.Faction}]");
 
-        await new GameState.RemoveCardFromHand(faction, card).Execute();
+        UI_Game.SetPlayer(card.Faction ?? ActingFaction); 
+
+        completion = new(); 
+        StartPlayCardEvent?.Invoke(this); 
+
+        await card.Execute(ActingFaction);
 
         if (card.RemovedEvent)
             await new GameState.RemoveCardFromGame(card).Execute(); 
         else
             await new GameState.Discard(card).Execute();
+
+        FinishPlayCardEvent?.Invoke(this); 
+        await completion.Task; 
     }
 }

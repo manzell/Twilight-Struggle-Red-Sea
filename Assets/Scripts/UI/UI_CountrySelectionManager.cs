@@ -7,7 +7,8 @@ using System.Linq;
 public class UI_CountrySelectionManager : MonoBehaviour
 {
     [SerializeField] GameObject buttonWindow;
-    [SerializeField] Button submitButton; 
+    [SerializeField] Button submitButton;
+    CountrySelectionManager selectionManager; 
 
     private void Start()
     {
@@ -17,19 +18,31 @@ public class UI_CountrySelectionManager : MonoBehaviour
 
     public void Setup(CountrySelectionManager selection)
     {
+        selectionManager = selection;
         buttonWindow.SetActive(true);
 
-        selection.SelectCountryEvent += c => SetButtonSelectStatus(selection); 
-        selection.DeselectCountryEvent += c => SetButtonSelectStatus(selection);
+        selectionManager.SelectCountryEvent += OnSelectionEvent;
+        selectionManager.DeselectCountryEvent += OnSelectionEvent;
         
-        SetButtonSelectStatus(selection);
-        submitButton.onClick.RemoveAllListeners();
-        submitButton.onClick.AddListener(() => selection.Complete()); 
+        SetButtonEnabledStatus();
     }
 
-    void SetButtonSelectStatus(CountrySelectionManager selectionManager)
+    void OnSelectionEvent(CountryData country) => SetButtonEnabledStatus(); 
+
+    void SetButtonEnabledStatus()
     {
         submitButton.enabled = selectionManager != null && selectionManager.Selected.Count >= selectionManager.minSelectable &&
             selectionManager.Selected.Count <= selectionManager.maxSelectable;
+    }
+
+    public void Submit()
+    {
+        if(selectionManager != null)
+        {
+            selectionManager.SelectCountryEvent -= OnSelectionEvent;
+            selectionManager.DeselectCountryEvent -= OnSelectionEvent;
+            selectionManager.Complete();
+            selectionManager = null;
+        }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 public class Realign : GameAction, IOpsAction
 {
-    [field: SerializeField] public List<Calculation<List<Country>>> targetRules { get; private set; } = new() { new StandardRealignTargets() };
+    [field: SerializeField] public List<Calculation<List<CountryData>>> targetRules { get; private set; } = new() { new StandardRealignTargets() };
     [field: SerializeField] public List<Modifier> Modifiers { get; private set; } = new();
 
     List<Attempt> attempts;
@@ -15,7 +15,7 @@ public class Realign : GameAction, IOpsAction
     public int OpsUsed { get; private set; }
     public void SetOps(Stat stat) => Ops = stat;
 
-    public Realign(Faction faction) => ActingFaction = faction;
+    public Realign(Faction faction) => SetActingFaction(faction);
 
     protected override async Task Do()
     {
@@ -23,7 +23,7 @@ public class Realign : GameAction, IOpsAction
         CountrySelectionManager selection = new(ActingFaction, targetRules.Select(rule => rule.Value()).Aggregate((first, next) => first.Intersect(next).ToList()), this,
             AttemptRealign, null, 0, Ops.Value(this));
 
-        void AttemptRealign(Country country)
+        void AttemptRealign(CountryData country)
         {
             Attempt attempt = new Attempt(this, country);
             attempts.Add(attempt);
@@ -41,18 +41,18 @@ public class Realign : GameAction, IOpsAction
         public Dictionary<Faction, Roll> rolls = new();
         public Dictionary<Faction, int> adjacencyBonus = new();
         Dictionary<Faction, int> totals = new();
-        public Country targetCountry { get; private set; }
+        public CountryData targetCountry { get; private set; }
         public Faction initiatingFaction { get; private set; }
 
-        public void SetTarget(Country targetCountry) => this.targetCountry = targetCountry;
+        public void SetTarget(CountryData targetCountry) => this.targetCountry = targetCountry;
 
         public int OpsCost = 1;
         Realign realignment;
 
-        public Attempt(Realign realign, Country targetCountry) : this(realign.ActingFaction, targetCountry) =>
+        public Attempt(Realign realign, CountryData targetCountry) : this(realign.ActingFaction, targetCountry) =>
             realignment = realign;
 
-        public Attempt(Faction faction, Country targetCountry)
+        public Attempt(Faction faction, CountryData targetCountry)
         {
             initiatingFaction = faction;
             this.targetCountry = targetCountry;

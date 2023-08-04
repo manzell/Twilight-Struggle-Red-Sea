@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Faction : ScriptableObject
 {
     [field: SerializeField] public string factionName { get; private set; }
-    public System.Action<Card> AddCardEvent, LoseCardEvent;
+    public System.Action<Card> AddCardEvent, RemoveCardEvent;
 
     [field: SerializeField] public Image Icon { get; private set; }
     [field: SerializeField] public Color PrimaryColor { get; private set; }

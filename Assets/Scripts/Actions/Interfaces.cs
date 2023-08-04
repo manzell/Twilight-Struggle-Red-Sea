@@ -7,8 +7,8 @@ public interface IContext { }
 
 public interface ITargetCountry
 {
-    public Country targetCountry { get; }
-    public void SetTarget(Country targetCountry);
+    public CountryData targetCountry { get; }
+    public void SetTarget(CountryData targetCountry);
 }
 
 public interface IActingPlayerAction : IExecutableAction

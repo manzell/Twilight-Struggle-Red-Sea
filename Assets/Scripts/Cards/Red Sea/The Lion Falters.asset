@@ -41,10 +41,13 @@ MonoBehaviour:
     baseValue: 2
     name: 
     modifiers: []
-  <RemovedEvent>k__BackingField: 0
   <CardImage>k__BackingField: {fileID: 0}
-  <CardText>k__BackingField: 'If Ethiopia is USSR Controlled +2 VPs. Otherwise, add
-    1 USSR Influence and remove all US Influence from Ethiopia. This Event allows
-    the "#RS27 Mengistu Haile Mariam" card to be played as an Event. '
+  <Effects>k__BackingField: []
+  <RemovedEvent>k__BackingField: 0
+  <CardText>k__BackingField: If Ethiopia is USSR Controlled +2 VPs. Otherwise, add
+    1 USSR Influence and remove all US Influence from Ethiopia.
   <CardFlavor>k__BackingField: 
   revealed: 0
+  references:
+    version: 2
+    RefIds: []

@@ -7,7 +7,7 @@ public class Roll
 {
     public static System.Action<Roll> PreRollEvent, RollEvent;
     public Faction faction { get; private set; }
-    int Result;
+    int Result = 0;
 
     public Roll(Faction facion)
     {

@@ -26,11 +26,7 @@ public abstract class GameAction : IExecutableAction
     protected abstract Task Do();
     public virtual void Undo() { }
 
-    public virtual void SetActingFaction(Faction faction) 
-    { 
-        ActingFaction = faction;
-        UI_Game.SetActivePlayerEvent?.Invoke(faction); 
-    }
+    public virtual void SetActingFaction(Faction faction) => ActingFaction = faction;
 }
 
 public interface IExecutableAction : IContext

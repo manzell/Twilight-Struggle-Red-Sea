@@ -11,7 +11,7 @@ public abstract class Condition
 
 public class ControlCountry : Condition
 {
-    [SerializeField] Country country;
+    [SerializeField] CountryData country;
     [SerializeField] Faction faction;
 
     public override bool Can(IContext context) => country.controllingFaction == faction;
@@ -19,7 +19,7 @@ public class ControlCountry : Condition
 
 public class CountryHasInfluence : Condition
 {
-    [SerializeField] Country country;
+    [SerializeField] CountryData country;
     [SerializeField] Faction faction;
 
     public override bool Can(IContext context) => country.Influence[faction] > 0;

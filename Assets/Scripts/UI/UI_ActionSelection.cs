@@ -10,15 +10,17 @@ public class UI_ActionSelection : MonoBehaviour
     public ActionSelectionManager actionSelectionManager { get; private set; }
     [SerializeField] UI_ActionSelectionReceiver actionSelectionReceiverPrefab;
     [SerializeField] Transform actionSelectionArea;
+    [SerializeField] GameObject window; 
     [SerializeField] TextMeshProUGUI header;
     [SerializeField] Image headerBackground;
 
-    public void Setup(ActionSelectionManager selectionManager, UI_ActionSelectionReceiver prefab)
+    public Faction Faction => actionSelectionManager.faction; 
+
+    public void Setup(ActionSelectionManager selectionManager)
     {
         actionSelectionManager = selectionManager;
-        actionSelectionReceiverPrefab = prefab;
-        header.text = selectionManager.actingFaction.name;
-        headerBackground.color = selectionManager.actingFaction.PrimaryColor;
+        header.text = selectionManager.faction.name;
+        headerBackground.color = selectionManager.faction.PrimaryColor;
 
         IDraggableCard.CardDragStartEvent += OnCardDragStart;
         IDraggableCard.CardDragEndEvent += OnCardDragEnd;
@@ -32,7 +34,7 @@ public class UI_ActionSelection : MonoBehaviour
 
     void OnCardDragStart(IDraggableCard ui)
     {
-        if (UI_Game.ActiveFaction == actionSelectionManager.actingFaction)
+        if (UI_Game.ActiveFaction == actionSelectionManager.faction)
             Open(ui.Card);
     }
 
@@ -40,8 +42,8 @@ public class UI_ActionSelection : MonoBehaviour
 
     void Style(Card card)
     {
-        foreach (Transform t in actionSelectionArea)
-            Destroy(t.gameObject);
+        foreach (UI_ActionSelectionReceiver actionReceiver in actionSelectionArea.GetComponentsInChildren<UI_ActionSelectionReceiver>())
+            Destroy(actionReceiver.gameObject);
 
         foreach (IExecutableAction action in actionSelectionManager.AvailableActions)
         {
@@ -53,20 +55,18 @@ public class UI_ActionSelection : MonoBehaviour
 
     public void Close()
     {
-        gameObject.SetActive(false);
+        window.SetActive(false);
     }
 
     public void Open(Card card)
     {
         Style(card); 
-        gameObject.SetActive(true);
+        window.SetActive(true);
     }
 
     public void Select(IExecutableAction action, Card card = null)
     {
         Close();
         actionSelectionManager.Select(action, card); 
-        Destroy(gameObject);
     }
-
 }

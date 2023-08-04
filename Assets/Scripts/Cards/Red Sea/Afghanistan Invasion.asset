@@ -52,7 +52,7 @@ MonoBehaviour:
       Data: 0
     - Name: source
       Entry: 1
-      Data: Presidential Directive 30
+      Data: Afghanistan Invasion
     - Name: Conditions
       Entry: 7
       Data: 4|System.Collections.Generic.List`1[[Condition, Assembly-CSharp]], mscorlib
@@ -69,8 +69,8 @@ MonoBehaviour:
       Entry: 4
       Data: -1
     - Name: Name
-      Entry: 6
-      Data: 
+      Entry: 1
+      Data: Afghanistan Invasion
     - Name: 
       Entry: 8
       Data: 
@@ -96,13 +96,7 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: effect
-      Entry: 7
-      Data: 7|AfghanistanInvasion, Assembly-CSharp
-    - Name: name
       Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
       Data: 
     - Name: 
       Entry: 8

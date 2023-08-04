@@ -7,4 +7,5 @@ public interface IDraggableCard : IDragHandler, IBeginDragHandler, IEndDragHandl
 {
     public static System.Action<IDraggableCard> CardDragStartEvent, CardDragEndEvent, CardDropEvent;
     public Card Card { get; }
+    public GameObject gameObject { get; }
 }

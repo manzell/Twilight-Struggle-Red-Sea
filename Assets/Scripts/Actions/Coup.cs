@@ -8,73 +8,63 @@ public class Coup : GameAction, IOpsAction
 {
     public static System.Action<Coup> PrepareCoupEvent, AfterCoupEvent;
 
-    [field: SerializeField] public List<Calculation<List<Country>>> targetRules { get; private set; } = new() { new StandardRealignTargets() };
-    public Country target => Selection.Selected.FirstOrDefault(); 
-    public IEnumerable<Country> targets { get; private set; }
-    Roll roll; 
+    [field: SerializeField] public List<Calculation<List<CountryData>>> targetRules { get; private set; } = new() { new StandardRealignTargets() };
+    [field: SerializeField] public List<Modifier> Modifiers { get; private set; } = new();
 
-    public TaskCompletionSource<Country> coupTargetTask { get; private set; }
+    public IEnumerable<CountryData> Targets { get; private set; }
     public CountrySelectionManager Selection { get; private set; }
+    public TaskCompletionSource<CountryData> Task { get; private set; }
     public Stat Ops { get; private set; }
+    public Roll Roll { get; private set; }
     public int OpsUsed { get; private set; }
 
+    public CountryData target => Selection.Selected.FirstOrDefault(); 
     public bool Successful => coupStrength > coupDefense;
     public int totalModifier => (int)Game.currentState.effects.SelectMany(effect => effect.Modifiers).Union(Modifiers).Sum(mod => mod.Value(this));
-    public int coupStrength => roll + Ops.Value(this) + totalModifier;
+    public int coupStrength => Roll + Ops.Value(this) + totalModifier;
     public int coupDefense => target.Stability * 2;
-
-    [field: SerializeField] public List<Modifier> Modifiers { get; private set; } = new(); 
 
     public Coup(Faction faction)
     {
-        SetActingFaction(faction);
-    }
+        Task = new();
+        Roll = new(faction);
 
-    public Coup(Faction faction, Card card) : this(faction) => Ops = card.Ops;
-
-    public override void SetActingFaction(Faction faction)
-    {
+        SetActingFaction(faction); 
         foreach(StandardRealignTargets calc in targetRules)
             calc.SetFaction(faction);
-
-        base.SetActingFaction(faction);
     }
+    public Coup(Faction faction, Card card) : this(faction) => Ops = card.Ops;
+
     public void SetOps(Stat stat) => Ops = stat;
-    public void SetTargets(IEnumerable<Country> countries) => targets = countries; 
+    public void SetTargets(IEnumerable<CountryData> countries) => Targets = countries; 
 
     protected override async Task Do()
     {
         UI_Notification.SetNotification($"{ActingFaction}: Select a Coup Target");
 
         // TODO - Are Target Rules additive or subtractive? 
-        if(targets == null) 
-            targets = targetRules.Select(rule => rule.Value()).Aggregate((first, next) => first.Intersect(next).ToList());
+        if(Targets == null) 
+            Targets = targetRules.Select(rule => rule.Value()).Aggregate((first, next) => first.Intersect(next).ToList());
 
-        Selection = new(ActingFaction, targets, this, PrepareCoup, OnCoup, 1, 1);
+        Selection = new(ActingFaction, Targets, this, PrepareCoup, OnCoup, 1, 1);
 
         await Selection.task;
+
+        UI_Notification.ClearNotification($"{ActingFaction}: Select a Coup Target"); 
+
+        await Task.Task; 
     }
 
-    void PrepareCoup(Country country)
+    void PrepareCoup(CountryData country)
     {
         PrepareCoupEvent?.Invoke(this);
     }
 
     public async Task OnCoup(CountrySelectionManager selection)
     {
-        roll = new(ActingFaction);
-
         Debug.Log($"COUP - {target} // BG: {target.Battleground} FP: {target.Flashpoint} Coup Def: {coupDefense} " +
             $"Ops: {Ops.Value(this)} Modifiers: {totalModifier} " +
-            $"Roll: {(int)roll} COUP STRENGTH: {coupStrength}");
-
-        System.Text.StringBuilder str = new();
-
-        foreach (Modifier mod in Game.currentState.effects.SelectMany(effect => effect.Modifiers).Union(Modifiers))
-            str.Append($"{mod.source}: {(mod.Value(this) > 0 ? "+" : string.Empty) + mod.Value(this)}");
-
-        if (str.Length > 0)
-            Debug.Log(str);
+            $"Roll: {(int)Roll} COUP STRENGTH: {coupStrength}");
 
         if (target.Battleground)
             await new GameState.AdjustDEFCON(-1).Execute();
@@ -109,5 +99,10 @@ public class Coup : GameAction, IOpsAction
         AfterCoupEvent?.Invoke(this);
 
         await new GameState.AdjustMilOps(ActingFaction, Ops.Value(this)).Execute();
+    }
+
+    public void CompleteCoup()
+    {
+        Task.SetResult(target); 
     }
 }

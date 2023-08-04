@@ -37,7 +37,7 @@ public class LeaveInnerSystem : SpaceStage
             CountrySelectionManager selection = new(factions[0], Game.currentState.Countries
                 .Where(country => country.Influence[factions[0].Opponent] > 0).ToList(), null);
 
-            Country country = (await selection.task).Selected.First(); 
+            CountryData country = (await selection.task).Selected.First(); 
 
             await new GameState.AdjustInfluence(factions[0].Opponent, country, -1).Execute(); 
         }

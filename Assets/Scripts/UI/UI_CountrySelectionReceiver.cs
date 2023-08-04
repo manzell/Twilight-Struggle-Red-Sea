@@ -8,7 +8,7 @@ public class UI_CountrySelectionReceiver : MonoBehaviour
 {
     CountrySelectionManager selectionManager;
     Faction faction;
-    public Country country => GetComponent<UI_Country>().country; 
+    public CountryData country => GetComponent<UI_Country>().country; 
 
     public void Setup(CountrySelectionManager selectionManager) 
     {

@@ -34,7 +34,7 @@ public class Card : SerializedScriptableObject
                 if (action is ICardAction cardAction)
                     cardAction.SetCard(this);
                 if(action is IActingPlayerAction actingPlayerAction)
-                    actingPlayerAction.SetActingFaction(Faction == null ? faction : Faction);
+                    actingPlayerAction.SetActingFaction(Faction ?? faction);
 
                 await action.Execute();
             }

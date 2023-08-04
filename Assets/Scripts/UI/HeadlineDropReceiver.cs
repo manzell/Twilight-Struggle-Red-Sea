@@ -37,9 +37,9 @@ public class HeadlineDropReceiver : MonoBehaviour, IDropHandler
         if (eventData.selectedObject.TryGetComponent(out IDraggableCard drag) && !drag.Card.Effects.Any(effect => effect is CannotHeadline) &&
             !headlinePhase.headlines.ContainsKey(faction) && UI_Game.ActiveFaction == faction)
         {
+            new GameState.RemoveCardFromHand(faction, drag.Card).Execute(); 
             headlinePhase.SubmitHeadline(faction, drag.Card);
             Style(UI_Game.ActiveFaction);
-
             Destroy(eventData.selectedObject);
         }
     }

@@ -10,7 +10,7 @@ namespace TwilightStruggle.Cards.RedSea
     public class ScoreContinent : CardAction 
     {
         [SerializeField] ContinentScore continentScoreCalc;
-        [SerializeField] Country strategicSeaLanes; 
+        [SerializeField] CountryData strategicSeaLanes; 
 
         protected override Task Do()
         {
@@ -37,6 +37,17 @@ namespace TwilightStruggle.Cards.RedSea
         }
     }
 
+    public class AfghanistanInvasion
+    {
+        public class AfghanistanInvasionEffect : Effect
+        {
+            public override void OnApply()
+            {
+                new GameState.CancelEffect(Game.currentState.effects.FirstOrDefault(effect => effect is Directive30.PresidentialDirective30Effect)).Execute();
+            }
+        }
+    }
+
     public class ApolloSoyuz : CardAction
     {
         protected override Task Do()
@@ -52,7 +63,7 @@ namespace TwilightStruggle.Cards.RedSea
 
     public class ArabLeague : CardAction
     {
-        [SerializeField] List<Country> requiredCountries;
+        [SerializeField] List<CountryData> requiredCountries;
         [SerializeField] int VPaward = 3, countriesControlRequirement = 3; 
 
         protected override Task Do()
@@ -66,8 +77,6 @@ namespace TwilightStruggle.Cards.RedSea
 
     public class CarterDoctrine : CardAction
     {
-        [SerializeField] UI_ActionSelection selectionWindowPrefab;
-        [SerializeField] UI_ActionSelectionReceiver selectionPrefab;
         System.Action<Roll> doctrine;
 
         protected override Task Do()
@@ -85,8 +94,7 @@ namespace TwilightStruggle.Cards.RedSea
             {
                 // Prompt the player to use the Carter Doctrine
                 ActionSelectionManager selection = new(roll.faction, 
-                    new List<IExecutableAction>() { new SetRoll(roll, 1), new SetRoll(roll, 6), new Pass() }, 
-                    selectionWindowPrefab, selectionPrefab);
+                    new List<IExecutableAction>() { new SetRoll(roll, 1), new SetRoll(roll, 6), new Pass() });
 
                 IExecutableAction action = await selection.selectionTask.Task; 
 
@@ -125,7 +133,7 @@ namespace TwilightStruggle.Cards.RedSea
     {
         //Place the CENTCOM marker next to one country. The USSR may not make Coup attempts or Realignment rolls against that country.
 
-        Country country; 
+        CountryData country; 
         protected override async Task Do()
         {
             // US Places the CENTCOM Marker
@@ -137,7 +145,7 @@ namespace TwilightStruggle.Cards.RedSea
             await selection.task; 
         }
 
-        void FilterCentcomCountry(IExecutableAction action, IEnumerable<Country> targetList)
+        void FilterCentcomCountry(IExecutableAction action, IEnumerable<CountryData> targetList)
         {
             if(action is Coup || action is Realign && action is IActingPlayerAction acting && acting.ActingFaction == Card.Faction.Opponent)
             {
@@ -148,16 +156,14 @@ namespace TwilightStruggle.Cards.RedSea
 
         public class CentcomToken : Effect
         {
-            public Country country { get; private set; }
-            public CentcomToken(Country country) => this.country = country;
+            public CountryData country { get; private set; }
+            public CentcomToken(CountryData country) => this.country = country;
         }
     }
 
     public class CyrusVance : CardAction
     {
         [SerializeField] int CardToDraw, VPaward;
-        UI_ActionSelection actionSelectionPrefab;
-        UI_ActionSelectionReceiver actionSelectorPrefab; 
 
         protected override async Task Do()
         {
@@ -172,8 +178,7 @@ namespace TwilightStruggle.Cards.RedSea
 
             if (cards.Count > 1)
             {
-                ActionSelectionManager selection = new(ActingFaction, cards.Select(card => new GameState.Discard(card)),
-                    actionSelectionPrefab, actionSelectorPrefab);
+                ActionSelectionManager selection = new(ActingFaction, cards.Select(card => new GameState.Discard(card)));
 
                 GameState.Discard selectedAction = (GameState.Discard)await selection.selectionTask.Task;
                 await selectedAction.Execute();
@@ -197,9 +202,8 @@ namespace TwilightStruggle.Cards.RedSea
 
     public class DanielArapMoi : CardAction
     {
-        [SerializeField] Country kenya;
+        [SerializeField] CountryData kenya;
         [SerializeField] int controlVPAward = 1, altAward = 2; 
-        [SerializeField] UI_ActionSelection actionSelection;
         [SerializeField] UI_ActionSelectionReceiver selectionReceiver; 
 
         protected override async Task Do()
@@ -209,14 +213,30 @@ namespace TwilightStruggle.Cards.RedSea
                 await new GameState.AdjustVP(Card.Faction, controlVPAward).Execute(); 
 
                 ActionSelectionManager selection = new ActionSelectionManager(Card.Faction, 
-                    new List<IExecutableAction>() { new GameState.AdjustDEFCON(1), new GameState.AdjustDEFCON(-1) }, 
-                    actionSelection, selectionReceiver);
+                    new List<IExecutableAction>() { new GameState.AdjustDEFCON(1), new GameState.AdjustDEFCON(-1) });
 
                 IExecutableAction selectedAction = await selection.selectionTask.Task;
                 await selectedAction.Execute(); 
             }
             else
-                await new GameState.AdjustInfluence(ActingFaction, kenya, altAward).Execute(); 
+                await new GameState.AdjustInfluence(ActingFaction, kenya, altAward).Execute();
+        }
+    }
+
+    public class EPLF : CardAction
+    {
+        //If Ethiopia is USSR Controlled, gain 1 VP and add 1 Influence in Ethiopia and 1 adjacent country. 
+
+        [SerializeField] CountryData ethiopia; 
+
+        protected override async Task Do()
+        {
+            await new GameState.AdjustInfluence(ActingFaction, ethiopia, 1).Execute();
+
+            CountrySelectionManager selection = new(ActingFaction, ethiopia.Neighbors, this, 
+                null, async sel => await new GameState.AdjustInfluence(ActingFaction, sel.Selected.FirstOrDefault(), 1).Execute());
+            
+            await selection.task;
         }
     }
 
@@ -227,7 +247,7 @@ namespace TwilightStruggle.Cards.RedSea
         // The USSR may make 1 Realignment roll against each country in Africa. This Event prevents the "#RS3 Ogaden War" card from being played as an Event. 
         protected override async Task Do()
         {
-            List<Country> africanCountries = new(Game.currentState.Countries.Where(country => country.Continents.Contains(africa) && country.Influence[ActingFaction.Opponent] > 0)); 
+            List<CountryData> africanCountries = new(Game.currentState.Countries.Where(country => country.Continents.Contains(africa) && country.Influence[ActingFaction.Opponent] > 0)); 
 
             await new GameState.AddEffect(new F35EsEffect()).Execute();
 
@@ -261,10 +281,10 @@ namespace TwilightStruggle.Cards.RedSea
                 SelectFamineCountry, FamineCoup, 2, 2, 1);
 
             await selection.task;
-            Debug.Log("Famine Task Do() await complete");
+            UI_Notification.ClearNotification("Place Famine Markers in two adjacent countries"); 
         }
 
-        void SelectFamineCountry(Country country)
+        void SelectFamineCountry(CountryData country)
         {
             if (selection.Selected.Count() == 0)
                 selection.SetSelectable(Game.currentState.Countries);
@@ -276,10 +296,10 @@ namespace TwilightStruggle.Cards.RedSea
 
         async Task FamineCoup(CountrySelectionManager sel)
         {
-            foreach (Country country in sel.Selected)
+            foreach (CountryData country in sel.Selected)
                 await new GameState.AddEffect(new FamineToken(country)).Execute();
 
-            IEnumerable<Country> coupTargets = sel.Selected.Where(country => country.Influence[ActingFaction.Opponent] > 0);
+            IEnumerable<CountryData> coupTargets = sel.Selected.Where(country => country.Influence[ActingFaction.Opponent] > 0);
 
             if (coupTargets.Count() > 0)
             {
@@ -295,9 +315,9 @@ namespace TwilightStruggle.Cards.RedSea
         public class FamineToken : Effect
         {
             public static System.Action<FamineToken> OnFamineTokenAdd, OnFamineTokenApply, OnFamineTokenRemove; 
-            public Country country { get; private set; }
+            public CountryData country { get; private set; }
 
-            public FamineToken(Country country)
+            public FamineToken(CountryData country)
             {
                 Coup.AfterCoupEvent += RemoveFamineToken;
 
@@ -308,7 +328,6 @@ namespace TwilightStruggle.Cards.RedSea
                 famineMod.Conditions.Add(new FamineCondition(country));
                 Modifiers.Add(famineMod); 
 
-
                 OnFamineTokenAdd?.Invoke(this); 
 
                 Debug.Log($"Famine Token added to {country.name} (Modifiers: {Modifiers.Count})");
@@ -316,8 +335,8 @@ namespace TwilightStruggle.Cards.RedSea
 
             public class FamineCondition : Condition
             {
-                Country country;
-                public FamineCondition(Country country) => this.country = country;
+                CountryData country;
+                public FamineCondition(CountryData country) => this.country = country;
                 public override bool Can(IContext context) => context is Coup coup && coup.target == country;
             }
 
@@ -335,7 +354,7 @@ namespace TwilightStruggle.Cards.RedSea
     public class FrenchConnection : CardAction
     {
         //Remove all USSR Influence in Djibouti or Madagascar and add 2 US Influence in 1 of those countries. 
-        [SerializeField] List<Country> targetCountries = new();
+        [SerializeField] List<CountryData> targetCountries = new();
         [SerializeField] int influenceAward; 
 
         protected override async Task Do()
@@ -351,6 +370,30 @@ namespace TwilightStruggle.Cards.RedSea
                     async country => await new GameState.AdjustInfluence(ActingFaction, country, influenceAward).Execute(), null);
 
                 await selection.task; 
+            }
+        }
+    }
+
+    public class HeroOfTheCrossing : CardAction
+    {
+        //Discard 1 USSR associated card from the US hand. Retrieve 1 US associated or neutral card from the discard pile and add it to the US hand. 
+
+        protected override async Task Do()
+        {
+            IEnumerable<Card> cards = ActingFaction.Hand.Where(card => card.Faction == ActingFaction.Opponent);
+            CardSelectionManager selection = new(ActingFaction, cards);
+
+            cards = (await selection.Task.Task).Selected;
+            foreach (Card card in cards)
+                await new GameState.Discard(card).Execute(); 
+
+            selection = new(ActingFaction, Game.currentState.discards.Where(c => c.Faction != ActingFaction.Opponent));
+
+            cards = (await selection.Task.Task).Selected;
+            foreach (Card card in cards)
+            {
+                await new GameState.AddCardToHand(card, ActingFaction).Execute();
+                await new GameState.RemoveCardFromDeck(card).Execute();
             }
         }
     }
@@ -402,14 +445,14 @@ namespace TwilightStruggle.Cards.RedSea
 
     public class KenyaJoinsRDF : CardAction
     {
-        [SerializeField] Country kenya; 
+        [SerializeField] CountryData kenya; 
         //Add 1 US Influence in Kenya and remove 1 USSR Influence in a non-USSR Controlled country. 
 
         protected override async Task Do()
         {
             await new GameState.AdjustInfluence(ActingFaction, kenya, 1).Execute(); 
 
-            IEnumerable<Country> targets = Game.currentState.Countries.Where(country => country.Influence[ActingFaction.Opponent] > 0 && country.controllingFaction != ActingFaction.Opponent);
+            IEnumerable<CountryData> targets = Game.currentState.Countries.Where(country => country.Influence[ActingFaction.Opponent] > 0 && country.controllingFaction != ActingFaction.Opponent);
             CountrySelectionManager selection = new(ActingFaction, targets, this,
                 async country => await new GameState.AdjustInfluence(ActingFaction.Opponent, country, -1).Execute(), null);
 
@@ -441,7 +484,7 @@ namespace TwilightStruggle.Cards.RedSea
 
             await selection.task; 
 
-            async void RelocateFrom(Country country)
+            async void RelocateFrom(CountryData country)
             {
                 if (country.Influence[ActingFaction] > 0)
                 {
@@ -454,7 +497,7 @@ namespace TwilightStruggle.Cards.RedSea
                 }
             }
 
-            async void RelocateTo(Country country)
+            async void RelocateTo(CountryData country)
             {
                 if(relocated > 0)
                 {
@@ -469,6 +512,29 @@ namespace TwilightStruggle.Cards.RedSea
         }
     }
 
+    public class MengistuHaileMariam : CardAction
+    {
+        //The USSR may immediately play any US associated card in their hand as if the event were associated with the USSR.
+        //Reverse US and USSR on any pertinent event text. 
+        protected override async Task Do()
+        {
+            CardSelectionManager selection = new(ActingFaction, ActingFaction.Hand.Where(card => card.Faction == ActingFaction.Opponent));
+            Card card = (await selection.Task.Task).Selected.FirstOrDefault();
+
+            if(card != null)
+            {
+                PlayCard play = new(ActingFaction, card);
+                Faction previousFaction = card.Faction;
+
+                card.SetFaction(ActingFaction);
+
+                await play.Execute();
+
+                card.SetFaction(previousFaction);
+            }
+        }
+    }
+
     public class MrNyet : CardAction
     {
         CountrySelectionManager selection;
@@ -477,11 +543,11 @@ namespace TwilightStruggle.Cards.RedSea
         {
             new GameState.AdjustDEFCON(-1); 
 
-            IEnumerable<Country> targets = Game.currentState.Countries.Where(country => country.Influence.Values.All(val => val > 0));
+            IEnumerable<CountryData> targets = Game.currentState.Countries.Where(country => country.Influence.Values.All(val => val > 0));
             selection = new(ActingFaction, targets, this, RemoveUSInfluence, null,
                 Mathf.Min(2, Game.currentState.Countries.Where(country => country.Influence.Values.All(val => val > 0)).Count()), 2); 
 
-            async void RemoveUSInfluence(Country country)
+            async void RemoveUSInfluence(CountryData country)
             {
                 await new GameState.AdjustInfluence(ActingFaction.Opponent, country, -country.Influence[ActingFaction.Opponent]).Execute();
                 selection.RemoveSelectable(targets.Where(c => c.Continents.Except(country.Continents).Count() > 0));
@@ -499,7 +565,6 @@ namespace TwilightStruggle.Cards.RedSea
         //Discard an Event card associated with your opponent and roll a die.Roll 4-6, use the discarded card's Operations value this Action Round.
         //Roll 1-3, conduct no Operations this Action Round.
 
-        [SerializeField] UI_ActionSelection actionSelectionPrefab;
         [SerializeField] UI_ActionSelectionReceiver actionReceiverPrefab;
 
         protected override async Task Do()
@@ -514,13 +579,11 @@ namespace TwilightStruggle.Cards.RedSea
                 Coup coup = new(ActingFaction);
                 Realign realign = new(ActingFaction);
                 Place place = new(ActingFaction); 
+                ActionSelectionManager selection = new(ActingFaction, new List<GameAction>() { coup, realign, place, });
+
                 coup.SetOps(discard.Ops);
                 realign.SetOps(discard.Ops);
                 place.SetOps(discard.Ops); 
-
-                ActionSelectionManager selection = new(ActingFaction, 
-                    new List<GameAction>() { coup, realign, place, },
-                    actionSelectionPrefab, actionReceiverPrefab);
 
                 IExecutableAction selectedAction = await selection.selectionTask.Task;
                 await selectedAction.Execute(); 
@@ -534,7 +597,7 @@ namespace TwilightStruggle.Cards.RedSea
         // On a modified roll of 5-6, the US receives 2 VPs and replaces all USSR Influence in Ethiopia with US Influence.
         // The US adds 2 to its Military Operations. This Event canot be used after the "#RS29 F-5Es Delivered" Event has been played. 
 
-        [SerializeField] Country ethiopia;
+        [SerializeField] CountryData ethiopia;
         [SerializeField] int vpAward, rollRequirement, milOpsAward; 
 
         protected override Task Do()
@@ -560,7 +623,7 @@ namespace TwilightStruggle.Cards.RedSea
 
         protected override async Task Do()
         {
-            IEnumerable<Country> targets = Game.currentState.Countries.Where(country => country.controllingFaction != ActingFaction.Opponent &&
+            IEnumerable<CountryData> targets = Game.currentState.Countries.Where(country => country.controllingFaction != ActingFaction.Opponent &&
                 country.Influence[ActingFaction.Opponent] > 0);
 
             CountrySelectionManager removeSelection = new(ActingFaction, targets, this, 
@@ -569,11 +632,11 @@ namespace TwilightStruggle.Cards.RedSea
 
             await removeSelection.task;
 
-            IEnumerable<Country> addInfluence = Game.currentState.Countries.Where(country => country.controllingFaction == ActingFaction); 
+            IEnumerable<CountryData> addInfluence = Game.currentState.Countries.Where(country => country.controllingFaction == ActingFaction); 
 
             CountrySelectionManager addSelection = new(ActingFaction, addInfluence, this,
                 null, async selection => {
-                    foreach(Country country in selection.Selected)
+                    foreach(CountryData country in selection.Selected)
                         await new GameState.AdjustInfluence(ActingFaction, country, 1).Execute();
                 }, 
                 Mathf.Min(addInfluence.Count(), influenceToAdd), influenceToAdd);
@@ -631,7 +694,7 @@ namespace TwilightStruggle.Cards.RedSea
         //Add 1 USSR Influence to Strategic Sea Lanes for every Middle Eastern country without US Influence.
         [SerializeField] Faction US;
         [SerializeField] Continent continent;
-        [SerializeField] Country strategicSeaLanes; 
+        [SerializeField] CountryData strategicSeaLanes; 
 
         protected override async Task Do()
         {
@@ -647,7 +710,7 @@ namespace TwilightStruggle.Cards.RedSea
 
         protected override async Task Do()
         {
-            IEnumerable<Country> targets = Game.currentState.Countries.Where(country => country.Continents.Contains(africa) && country.Influence[ActingFaction.Opponent] != 0);
+            IEnumerable<CountryData> targets = Game.currentState.Countries.Where(country => country.Continents.Contains(africa) && country.Influence[ActingFaction.Opponent] != 0);
             int minSelection = Mathf.Clamp(targets.Count(), 0, 1);
 
             CountrySelectionManager selection = new(ActingFaction, targets, this, null, RemoveUSInfluence, minSelection, 1); 
@@ -656,7 +719,7 @@ namespace TwilightStruggle.Cards.RedSea
 
             async Task RemoveUSInfluence(CountrySelectionManager selection)
             {
-                Country country = selection.Selected.First(); 
+                CountryData country = selection.Selected.First(); 
                 await new GameState.AdjustInfluence(ActingFaction.Opponent, country, -country.Influence[ActingFaction.Opponent]).Execute();
             }
         }
@@ -666,8 +729,6 @@ namespace TwilightStruggle.Cards.RedSea
     {
         // The US must reveal any Scoring cards in the US hand. The USSR may then conduct Operations using this card's Operations value.
         // If the US revealed a Scoring card, 1 must be played on the next US Action Round. 
-        [SerializeField] UI_ActionSelection selector;
-        [SerializeField] UI_ActionSelectionReceiver receiver; 
         [SerializeField] List<Card> scoringCards; 
 
         protected override async Task Do()
@@ -677,8 +738,7 @@ namespace TwilightStruggle.Cards.RedSea
             if (usHeldScoringCards.Count() > 0)
             {
                 ActionSelectionManager selection = new(ActingFaction,
-                    new List<IExecutableAction> { new Coup(ActingFaction, Card), new Realign(ActingFaction), new Place(ActingFaction) },
-                    selector, receiver);
+                    new List<IExecutableAction> { new Coup(ActingFaction, Card), new Realign(ActingFaction), new Place(ActingFaction) });
 
                 IExecutableAction action = await selection.selectionTask.Task;
                 await action.Execute();
@@ -687,71 +747,7 @@ namespace TwilightStruggle.Cards.RedSea
             // There is an edge case where under USAID the Soviets can event this in T2 AR7 and US won't be forced to play their card... but if they ho
             foreach (Card card in Game.currentState.hands[ActingFaction.Opponent])
                 if(scoringCards.Contains(card))
-                    card.revealed = true;                
-        }
-    }
-
-    public class EPLF : CardAction
-    {
-        //If Ethiopia is USSR Controlled, gain 1 VP and add 1 Influence in Ethiopia and 1 adjacent country. 
-
-        [SerializeField] Country ethiopia; 
-
-        protected override async Task Do()
-        {
-            await new GameState.AdjustInfluence(ActingFaction, ethiopia, 1).Execute();
-
-            CountrySelectionManager selection = new(ActingFaction, ethiopia.Neighbors, this,
-                null, async sel => await new GameState.AdjustInfluence(ActingFaction, sel.Selected.FirstOrDefault(), 1).Execute());
-
-            await selection.task; 
-        }
-    }
-
-    public class HeroOfTheCrossing : CardAction
-    {
-        //Discard 1 USSR associated card from the US hand. Retrieve 1 US associated or neutral card from the discard pile and add it to the US hand. 
-
-        protected override async Task Do()
-        {
-            IEnumerable<Card> cards = ActingFaction.Hand.Where(card => card.Faction == ActingFaction.Opponent);
-            CardSelectionManager selection = new(ActingFaction, cards);
-
-            cards = (await selection.Task.Task).Selected;
-            foreach (Card card in cards)
-                await new GameState.Discard(card).Execute(); 
-
-            selection = new(ActingFaction, Game.currentState.discards.Where(c => c.Faction != ActingFaction.Opponent));
-
-            cards = (await selection.Task.Task).Selected;
-            foreach (Card card in cards)
-            {
-                await new GameState.AddCardToHand(card, ActingFaction).Execute();
-                await new GameState.RemoveCardFromDeck(card).Execute();
-            }
-        }
-    }
-
-    public class MengistuHaileMariam : CardAction
-    {
-        //The USSR may immediately play any US associated card in their hand as if the event were associated with the USSR.
-        //Reverse US and USSR on any pertinent event text. 
-        protected override async Task Do()
-        {
-            CardSelectionManager selection = new(ActingFaction, ActingFaction.Hand.Where(card => card.Faction == ActingFaction.Opponent));
-            Card card = (await selection.Task.Task).Selected.FirstOrDefault();
-
-            if(card != null)
-            {
-                PlayCard play = new(ActingFaction, card);
-                Faction previousFaction = card.Faction;
-
-                card.SetFaction(ActingFaction);
-
-                await play.Execute();
-
-                card.SetFaction(previousFaction);
-            }
+                    card.revealed = true; 
         }
     }
 }

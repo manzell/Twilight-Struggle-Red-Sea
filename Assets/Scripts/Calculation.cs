@@ -9,34 +9,34 @@ public abstract class Calculation<T>
     public abstract T Value();
 }
 
-public class StandardPlacementTargets : Calculation<List<Country>>
+public class StandardPlacementTargets : Calculation<List<CountryData>>
 {
     [field: SerializeField] public Faction faction { get; private set; }
-    [SerializeField] Country strategicSeaLanes;
+    [SerializeField] CountryData strategicSeaLanes;
 
-    public override List<Country> Value() => new(Game.currentState.Countries
+    public override List<CountryData> Value() => new(Game.currentState.Countries
         .Where(country => country == strategicSeaLanes || country.Influence[faction] > 0 || country.Neighbors.Any(neighbor => neighbor.Influence[faction] > 0)));
 
     public void SetFaction(Faction faction) => this.faction = faction; 
 }
 
-public class StandardRealignTargets : Calculation<List<Country>>
+public class StandardRealignTargets : Calculation<List<CountryData>>
 {
     [field: SerializeField] public Faction faction { get; private set; }
-    [SerializeField] Country strategicSeaLanes;
+    [SerializeField] CountryData strategicSeaLanes;
 
-    public override List<Country> Value() => new(Game.currentState.Countries
+    public override List<CountryData> Value() => new(Game.currentState.Countries
         .Where(country => country != strategicSeaLanes && country.Influence[faction.Opponent] > 0 
             && Game.current.gameState.defcon > country.Continents.Min(continent => continent.DefconRequirement)));
 
     public void SetFaction(Faction faction) => this.faction = faction;
 }
 
-public class CountriesInContinent : Calculation<List<Country>>
+public class CountriesInContinent : Calculation<List<CountryData>>
 {
     [SerializeField] Continent continent;
     public CountriesInContinent(Continent continent) => this.continent = continent; 
-    public override List<Country> Value() => new(Game.currentState.Countries.Where(country => country.Continents.Contains(continent))); 
+    public override List<CountryData> Value() => new(Game.currentState.Countries.Where(country => country.Continents.Contains(continent))); 
 }
 
 public class NextSpaceStage : Calculation<SpaceStage> 
@@ -47,11 +47,11 @@ public class NextSpaceStage : Calculation<SpaceStage>
     public override SpaceStage Value() => Game.current.gameState.SpaceRaceItems.FirstOrDefault(stage => !stage.factions.Contains(faction));
 }
 
-public class CountryList : Calculation<List<Country>>
+public class CountryList : Calculation<List<CountryData>>
 {
-    [SerializeField] List<Country> countries;
-    public CountryList(List<Country> countries) => this.countries = countries; 
-    public override List<Country> Value() => countries; 
+    [SerializeField] List<CountryData> countries;
+    public CountryList(List<CountryData> countries) => this.countries = countries; 
+    public override List<CountryData> Value() => countries; 
 }
 
 public class ContinentScore : Calculation<(Faction, int)> 

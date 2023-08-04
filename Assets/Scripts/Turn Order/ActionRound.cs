@@ -9,8 +9,6 @@ public class ActionRound : Phase
     public Faction phasingFaction { get; private set; }
     public IExecutableAction playedAction { get; private set; }
     [SerializeField] List<GameAction> defaultActions;
-    [SerializeField] UI_ActionSelection actionSelectionPrefab;
-    [SerializeField] UI_ActionSelectionReceiver actionReceiverPrefab;
 
     public void SetPhasingFaction(Faction faction) => phasingFaction = faction;
     public void SetActions(List<GameAction> actions) => defaultActions = actions;
@@ -20,13 +18,10 @@ public class ActionRound : Phase
     {
         await new GameState.SetPhasingPlayer(phasingFaction).Execute();
 
-        foreach(IActingPlayerAction action in defaultActions.OfType<IActingPlayerAction>())
-            action.SetActingFaction(phasingFaction);
-
         string notification = $"Play {phasingFaction.name} Action Round"; 
         UI_Notification.SetNotification(notification);
 
-        ActionSelectionManager selection = new(phasingFaction, defaultActions, actionSelectionPrefab, actionReceiverPrefab); 
+        ActionSelectionManager selection = new(phasingFaction, defaultActions); 
         
         UI_Notification.ClearNotification(notification);
 
@@ -49,7 +44,7 @@ public class ActionRound : Phase
             }
             else // If we triggered the action already, the PlayCard action will be gone, meaning 
             {
-                selection = new(phasingFaction, selection.AvailableActions, actionSelectionPrefab, actionReceiverPrefab);
+                selection = new(phasingFaction, selection.AvailableActions);
                 playedAction = await selection.selectionTask.Task;
             }
         }

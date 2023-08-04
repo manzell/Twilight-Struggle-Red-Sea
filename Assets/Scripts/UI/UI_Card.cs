@@ -2,19 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI; 
-using TMPro;
 using UnityEngine.EventSystems;
-using System.Linq;
-using DG.Tweening; 
+using TMPro;
+using DG.Tweening;
 
-public class UI_Card : MonoBehaviour, IDraggableCard, IPointerEnterHandler, IPointerExitHandler
+public class UI_Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    //public static System.Action<IDraggableCard> CardDragStartEvent, CardDragEndEvent, CardDropEvent;
-    [field: SerializeField] public Card Card { get; private set; }
-
+    public static System.Action<UI_Card> OnCardDragStart, OnCardDragEnd;
+    [SerializeField] GameObject highlight, showCard; 
     [SerializeField] TextMeshProUGUI cardName, influenceText, cardText, cardFlowText;
     [SerializeField] Image nameplateBG;
-    Transform parent;
+
+    public Card Card { get; private set; }
     int index;
 
     private void Awake()
@@ -25,7 +24,7 @@ public class UI_Card : MonoBehaviour, IDraggableCard, IPointerEnterHandler, IPoi
 
     public void Setup(Card card)
     {
-        this.Card = card;
+        Card = card;
 
         influenceText.text = card.Ops.Value().ToString();
         cardName.text = card.Name;
@@ -38,10 +37,22 @@ public class UI_Card : MonoBehaviour, IDraggableCard, IPointerEnterHandler, IPoi
         }
     }
 
+    public void SetDisplay(bool show) => showCard.SetActive(show);
+
+    public void Highlight(Faction faction)
+    {
+        Color color = faction.PrimaryColor;
+        color.a = 0.75f;
+
+        highlight.GetComponent<Image>().color = color;
+        highlight.SetActive(true); 
+    }
+
+    public void RemoveHighlight() => highlight.SetActive(false);
+
     public void OnPointerEnter(PointerEventData eventData)
     {
         transform.DOScale(2, 0.5f);
-        //transform.DOLocalMoveY(-transform.GetComponent<RectTransform>().sizeDelta.y / 2, 0.5f);
         Color color = cardText.color;
         color.a = 1;
         cardText.DOColor(color, .4f);
@@ -57,7 +68,6 @@ public class UI_Card : MonoBehaviour, IDraggableCard, IPointerEnterHandler, IPoi
     public void OnPointerExit(PointerEventData eventData)
     {
         transform.DOScale(1f, .5f);
-        //transform.DOLocalMoveY(transform.GetComponent<RectTransform>().sizeDelta.y / 2, 0.5f);
         Color color = cardText.color;
         color.a = 0;
         cardText.DOColor(color, .6f);
@@ -65,34 +75,5 @@ public class UI_Card : MonoBehaviour, IDraggableCard, IPointerEnterHandler, IPoi
 
         if (UI_Game.ActiveFaction.Hand.Contains(Card))
             transform.SetSiblingIndex(index);
-    }
-
-    public void OnBeginDrag(PointerEventData eventData)
-    {
-        // Todo - right now either player can drag any other player's card. 
-        if(transform.parent.TryGetComponent(out UI_Hand uiHand))
-        {
-            parent = uiHand.transform;
-
-            uiHand.RemoveCardFromHand(this);
-            EventSystem.current.SetSelectedGameObject(gameObject);
-            GetComponent<CanvasGroup>().blocksRaycasts = false;
-            IDraggableCard.CardDragStartEvent?.Invoke(this);
-        }
-    }
-
-    public void OnDrag(PointerEventData eventData)
-    {
-        transform.position += (Vector3)eventData.delta; 
-    }
-
-    public void OnEndDrag(PointerEventData eventData)
-    {
-        EventSystem.current.SetSelectedGameObject(null);
-        GetComponent<CanvasGroup>().blocksRaycasts = true;
-        
-        parent.GetComponent<UI_Hand>()?.AddCardToHand(this);
-
-        IDraggableCard.CardDragEndEvent?.Invoke(this);
     }
 }
