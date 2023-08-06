@@ -4,18 +4,18 @@ using UnityEngine;
 using System.Linq;
 using System.Threading.Tasks; 
 
-public class PlayCard : GameAction, ICardAction
+public class Event : GameAction, ICardAction
 {
     public Card card { get; private set; }
-    public TaskCompletionSource<PlayCard> completion { get; private set; }
+    public TaskCompletionSource<Event> completion { get; private set; }
 
     public Card Card => card;
 
-    public static System.Action<PlayCard> StartPlayCardEvent, FinishPlayCardEvent; 
+    public static System.Action<Event> StartPlayCardEvent, FinishPlayCardEvent; 
 
-    public PlayCard(Faction faction) => SetActingFaction(faction);
-    public PlayCard(Faction faction, Card card) : this(faction) => this.card = card; 
-    public PlayCard(KeyValuePair<Faction, Card> kvp) : this(kvp.Key, kvp.Value) { }
+    public Event(Faction faction) => SetActingFaction(faction);
+    public Event(Faction faction, Card card) : this(faction) => this.card = card; 
+    public Event(KeyValuePair<Faction, Card> kvp) : this(kvp.Key, kvp.Value) { }
 
     public void SetCard(Card card)
     {
@@ -24,7 +24,7 @@ public class PlayCard : GameAction, ICardAction
 
     protected override async Task Do()
     {
-        Debug.Log($"{ActingFaction.name} plays {card.Name} [{card.Faction}]");
+        Debug.Log($"{ActingFaction.name} Events {card.Name} [{card.Faction.name}]");
 
         UI_Game.SetPlayer(card.Faction ?? ActingFaction); 
 
@@ -41,4 +41,6 @@ public class PlayCard : GameAction, ICardAction
         FinishPlayCardEvent?.Invoke(this); 
         await completion.Task; 
     }
+
+    public bool Can(Card card) => true; 
 }

@@ -793,13 +793,127 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-    - Name: <SpaceRaceItems>k__BackingField
+    - Name: <SpaceRaceStages>k__BackingField
       Entry: 7
       Data: 14|System.Collections.Generic.List`1[[SpaceStage, Assembly-CSharp]],
         mscorlib
     - Name: 
       Entry: 12
+      Data: 3
+    - Name: 
+      Entry: 7
+      Data: 15|LeaveInnerSystem, Assembly-CSharp
+    - Name: name
+      Entry: 1
+      Data: First mission to leave the inner Solar System
+    - Name: <OpsRequired>k__BackingField
+      Entry: 3
+      Data: 2
+    - Name: <MaxRoll>k__BackingField
+      Entry: 3
+      Data: 4
+    - Name: icon
+      Entry: 6
+      Data: 
+    - Name: <factions>k__BackingField
+      Entry: 7
+      Data: 16|System.Collections.Generic.List`1[[Faction, Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
       Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 17|PhotoOtherPlanet, Assembly-CSharp
+    - Name: name
+      Entry: 1
+      Data: First photos of the surface of another planet
+    - Name: <OpsRequired>k__BackingField
+      Entry: 3
+      Data: 2
+    - Name: <MaxRoll>k__BackingField
+      Entry: 3
+      Data: 3
+    - Name: icon
+      Entry: 6
+      Data: 
+    - Name: <factions>k__BackingField
+      Entry: 7
+      Data: 18|System.Collections.Generic.List`1[[Faction, Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: VPAward
+      Entry: 7
+      Data: 19|System.Int32[], mscorlib
+    - Name: 
+      Entry: 14
+      Data: 2
+    - Name: 
+      Entry: 3
+      Data: 2
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 20|SpaceShuttle, Assembly-CSharp
+    - Name: name
+      Entry: 1
+      Data: Reusable Space Shuttle
+    - Name: <OpsRequired>k__BackingField
+      Entry: 3
+      Data: 3
+    - Name: <MaxRoll>k__BackingField
+      Entry: 3
+      Data: 4
+    - Name: icon
+      Entry: 6
+      Data: 
+    - Name: <factions>k__BackingField
+      Entry: 7
+      Data: 21|System.Collections.Generic.List`1[[Faction, Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: VPAward
+      Entry: 3
+      Data: 3
+    - Name: numCardDraw
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 13
       Data: 

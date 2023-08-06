@@ -28,17 +28,10 @@ public class HeadlinePhase : Phase
             headlines.OrderByDescending(kvp => kvp.Value.Ops.Value()).ThenByDescending(kvp => kvp.Key == Game.current.gameState.CurrentTurn.initiativeFaction))
         {
             await new GameState.SetPhasingPlayer(headline.Key).Execute();
-            await new PlayCard(headline).Execute();
+            await new Event(headline).Execute();
         }
 
         EndPhase();
-    }
-
-    public override void EndPhase()
-    {
-        Game.currentState.CurrentTurn.CreateActionRounds(); 
-
-        new GameState.StartPhase(transform.parent.GetComponentInChildren<ActionRound>()).Execute(); 
     }
 
     public void SubmitHeadline(Faction faction, Card card)

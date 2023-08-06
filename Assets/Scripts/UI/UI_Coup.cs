@@ -20,7 +20,7 @@ public class UI_Coup : MonoBehaviour
 
     void Setup(Coup coup)
     {
-        CountryData country = coup.target;
+        CountryData country = coup.Target;
         this.coup = coup;
 
         window.SetActive(true);
@@ -31,16 +31,17 @@ public class UI_Coup : MonoBehaviour
         int opsToBreak = country.Influence[coup.ActingFaction.Opponent] - country.Influence[coup.ActingFaction] - country.Stability + 1;
 
         coupTarget.text = country.name;
+
         coupOps.text = coup.Ops.Value(coup).ToString();
         coupBonus.text = coup.totalModifier.ToString();
-        coupDefense.text = (coup.target.Stability * 2).ToString(); 
+        coupDefense.text = (coup.Target.Stability * 2).ToString(); 
         coupRollText.text = coup.Roll;
         coupStrengthText.text = (coup.Ops.Value(coup) + coup.totalModifier + coup.Roll).ToString(); 
 
         influenceLossTitleText.text = $"{coup.ActingFaction.Opponent.name} influence removed:";
         influenceGainTitleText.text = $"{coup.ActingFaction.name} influence added:";
-        influenceRemovedText.text = $"{Mathf.Min(coup.target.Influence[coup.ActingFaction.Opponent], coup.coupStrength - coup.target.Stability * 2)}";
-        influenceAddedText.text = $"{Mathf.Max(0, coup.coupStrength - coup.target.Stability * 2 - coup.target.Influence[coup.ActingFaction.Opponent])}";
+        influenceRemovedText.text = $"{Mathf.Min(coup.Target.Influence[coup.ActingFaction.Opponent], coup.coupStrength - coup.Target.Stability * 2)}";
+        influenceAddedText.text = $"{Mathf.Max(0, coup.coupStrength - coup.Target.Stability * 2 - coup.Target.Influence[coup.ActingFaction.Opponent])}";
 
         forControl.text = (influenceNeededForControl + country.Stability * 2 - (coup.Ops.Value(coup) + coup.totalModifier)).ToString();
         forPresence.text = $"{country.Stability * 2 + country.Influence[coup.ActingFaction.Opponent] - (coup.Ops.Value(coup) + coup.totalModifier) + 1}";
@@ -77,7 +78,7 @@ public class UI_Coup : MonoBehaviour
     public void TriggerCoup()
     {
         prepWindow.SetActive(false);
-        coup.Selection.Complete();
+        coup.CompleteCoup();
         resultWindow.SetActive(true);
     }
 

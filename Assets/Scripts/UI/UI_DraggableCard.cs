@@ -8,6 +8,7 @@ using System.Linq;
 public class UI_DraggableCard : MonoBehaviour, IDraggableCard
 {
     public static System.Action<IDraggableCard> CardDragStartEvent, CardDragEndEvent, CardDropEvent;
+    public static bool DraggingDisabled;
 
     public Card Card => GetComponent<UI_Card>().Card;
 
@@ -23,7 +24,8 @@ public class UI_DraggableCard : MonoBehaviour, IDraggableCard
     {
         parent = transform.parent; 
 
-        if (parent.TryGetComponent(out UI_Hand uiHand))
+        // TODO - Find a way to disable Card Dragging 
+        if (parent.TryGetComponent(out UI_Hand uiHand) && !DraggingDisabled)
         {
             transform.SetParent(dragUISpace);
             eventData.selectedObject = gameObject; 
@@ -43,7 +45,6 @@ public class UI_DraggableCard : MonoBehaviour, IDraggableCard
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        Debug.Log("On End Drag"); 
         GetComponent<CanvasGroup>().blocksRaycasts = true;
 
         if (parent.TryGetComponent(out UI_Hand uiHand))

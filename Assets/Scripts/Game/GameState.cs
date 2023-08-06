@@ -34,7 +34,7 @@ public class GameState : SerializedScriptableObject
     
     [field: SerializeField] public List<IExecutableAction> ExecutedActions { get; private set; }
 
-    [field: SerializeField] public List<SpaceStage> SpaceRaceItems { get; private set; }
+    [field: SerializeField] public List<SpaceStage> SpaceRaceStages { get; private set; }
 
     public List<Card> Hand(Faction faction) => hands[faction];
     public HashSet<CountryData> Countries => new(influence.Keys.Select(fc => fc.country));
@@ -198,9 +198,6 @@ public class GameState : SerializedScriptableObject
 
         public override void Do()
         {
-            Debug.Log(faction);
-            Debug.Log(amount);
-            Debug.Log(Game.currentState.vps[faction]); 
             Game.currentState.vps[faction] += amount; 
 
             if(amount != 0)
@@ -248,11 +245,6 @@ public class GameState : SerializedScriptableObject
         public AdjustInfluence(Faction faction, CountryData country, int amount) => 
             infChange = new Dictionary<FactionCountry, int>() { { new FactionCountry(faction, country), amount } };
 
-        public override void Undo()
-        {
-            Game.currentState.influence = previousInfluence;
-        }
-
         public override void Do()
         {
             previousInfluence = Game.currentState.influence;
@@ -264,7 +256,7 @@ public class GameState : SerializedScriptableObject
                 
                 if(currentInfluence != newInfluence)
                 {
-                    Debug.Log($"{(infChange[kvp] < 0 ? string.Empty : "+")}{infChange[kvp]} {kvp.faction.name} Influence in {kvp.country}");
+                    Debug.Log($"{(infChange[kvp] < 0 ? string.Empty : "+")}{infChange[kvp]} {kvp.faction.name} Influence in {kvp.country.name}");
                     Game.currentState.influence[kvp] = newInfluence;
                     kvp.country.InfluenceChangeEvent?.Invoke(kvp.faction, newInfluence - currentInfluence);
                 }

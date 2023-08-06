@@ -11,18 +11,18 @@ public class Coup : GameAction, IOpsAction
     [field: SerializeField] public List<Calculation<List<CountryData>>> targetRules { get; private set; } = new() { new StandardRealignTargets() };
     [field: SerializeField] public List<Modifier> Modifiers { get; private set; } = new();
 
-    public IEnumerable<CountryData> Targets { get; private set; }
     public CountrySelectionManager Selection { get; private set; }
+    public IEnumerable<CountryData> Targets { get; private set; }
+    public CountryData Target { get; private set; }
     public TaskCompletionSource<CountryData> Task { get; private set; }
     public Stat Ops { get; private set; }
     public Roll Roll { get; private set; }
     public int OpsUsed { get; private set; }
 
-    public CountryData target => Selection.Selected.FirstOrDefault(); 
     public bool Successful => coupStrength > coupDefense;
     public int totalModifier => (int)Game.currentState.effects.SelectMany(effect => effect.Modifiers).Union(Modifiers).Sum(mod => mod.Value(this));
     public int coupStrength => Roll + Ops.Value(this) + totalModifier;
-    public int coupDefense => target.Stability * 2;
+    public int coupDefense => Target.Stability * 2;
 
     public Coup(Faction faction)
     {
@@ -33,7 +33,7 @@ public class Coup : GameAction, IOpsAction
         foreach(StandardRealignTargets calc in targetRules)
             calc.SetFaction(faction);
     }
-    public Coup(Faction faction, Card card) : this(faction) => Ops = card.Ops;
+    public Coup(Faction faction, Card card) : this(faction) => SetOps(card.Ops); 
 
     public void SetOps(Stat stat) => Ops = stat;
     public void SetTargets(IEnumerable<CountryData> countries) => Targets = countries; 
@@ -60,16 +60,18 @@ public class Coup : GameAction, IOpsAction
         PrepareCoupEvent?.Invoke(this);
     }
 
-    public async Task OnCoup(CountrySelectionManager selection)
+    public async void OnCoup(CountrySelectionManager selection)
     {
-        Debug.Log($"COUP - {target} // BG: {target.Battleground} FP: {target.Flashpoint} Coup Def: {coupDefense} " +
+        Target = selection.Selected.First(); 
+
+        Debug.Log($"COUP - {Target} // BG: {Target.Battleground} FP: {Target.Flashpoint} Coup Def: {coupDefense} " +
             $"Ops: {Ops.Value(this)} Modifiers: {totalModifier} " +
             $"Roll: {(int)Roll} COUP STRENGTH: {coupStrength}");
 
-        if (target.Battleground)
+        if (Target.Battleground)
             await new GameState.AdjustDEFCON(-1).Execute();
 
-        if (target.Flashpoint)
+        if (Target.Flashpoint)
         {
             GameState.DrawCard revealCardAction = new GameState.DrawCard();
             await revealCardAction.Execute();
@@ -85,16 +87,16 @@ public class Coup : GameAction, IOpsAction
 
         if (coupStrength > coupDefense)
         {
-            int OpponentInfluenceToRemove = Mathf.Min(Game.current.gameState.Influence(target)[ActingFaction.Opponent], coupStrength - coupDefense);
+            int OpponentInfluenceToRemove = Mathf.Min(Game.current.gameState.Influence(Target)[ActingFaction.Opponent], coupStrength - coupDefense);
             int InfluenceToAdd = coupStrength - coupDefense - OpponentInfluenceToRemove;
 
             if (OpponentInfluenceToRemove > 0)
-                await new GameState.AdjustInfluence(ActingFaction.Opponent, target, -OpponentInfluenceToRemove).Execute();
+                await new GameState.AdjustInfluence(ActingFaction.Opponent, Target, -OpponentInfluenceToRemove).Execute();
             if (InfluenceToAdd > 0)
-                await new GameState.AdjustInfluence(ActingFaction, target, InfluenceToAdd).Execute();
+                await new GameState.AdjustInfluence(ActingFaction, Target, InfluenceToAdd).Execute();
         }
         else
-            Debug.Log($"{ActingFaction} Coup in {target} Failed");
+            Debug.Log($"{ActingFaction} Coup in {Target} Failed");
 
         AfterCoupEvent?.Invoke(this);
 
@@ -103,6 +105,6 @@ public class Coup : GameAction, IOpsAction
 
     public void CompleteCoup()
     {
-        Task.SetResult(target); 
+        Task.SetResult(Target); 
     }
 }

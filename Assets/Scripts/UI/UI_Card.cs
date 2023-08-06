@@ -2,19 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI; 
-using UnityEngine.EventSystems;
 using TMPro;
-using DG.Tweening;
 
-public class UI_Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class UI_Card : MonoBehaviour
 {
     public static System.Action<UI_Card> OnCardDragStart, OnCardDragEnd;
-    [SerializeField] GameObject highlight, showCard; 
-    [SerializeField] TextMeshProUGUI cardName, influenceText, cardText, cardFlowText;
+    [field: SerializeField] public GameObject highlight { get; private set; }
+    [field: SerializeField] public GameObject showCard; 
+    [field: SerializeField] public TextMeshProUGUI cardName { get; private set; }
+    [field: SerializeField] public TextMeshProUGUI influenceText { get; private set; }
+    [field: SerializeField] public TextMeshProUGUI cardText { get; private set; }
+    [field: SerializeField] public TextMeshProUGUI cardFlowText { get; private set; }
+
     [SerializeField] Image nameplateBG;
 
     public Card Card { get; private set; }
-    int index;
+    public int index;
 
     private void Awake()
     {
@@ -25,10 +28,11 @@ public class UI_Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void Setup(Card card)
     {
         Card = card;
-
-        influenceText.text = card.Ops.Value().ToString();
         cardName.text = card.Name;
         cardText.text = card.CardText;
+
+        if (influenceText != null)
+            influenceText.text = card.Ops.Value().ToString();
 
         if (card.Faction != null)
         {
@@ -50,30 +54,4 @@ public class UI_Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void RemoveHighlight() => highlight.SetActive(false);
 
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        transform.DOScale(2, 0.5f);
-        Color color = cardText.color;
-        color.a = 1;
-        cardText.DOColor(color, .4f);
-        cardFlowText.DOColor(color, .4f);
-
-        if (UI_Game.ActiveFaction.Hand.Contains(Card))
-        {
-            index = transform.GetSiblingIndex();
-            transform.SetAsLastSibling();
-        }
-    }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        transform.DOScale(1f, .5f);
-        Color color = cardText.color;
-        color.a = 0;
-        cardText.DOColor(color, .6f);
-        cardFlowText.DOColor(color, .6f);
-
-        if (UI_Game.ActiveFaction.Hand.Contains(Card))
-            transform.SetSiblingIndex(index);
-    }
 }

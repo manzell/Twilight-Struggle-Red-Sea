@@ -24,7 +24,6 @@ public class UI_Game : MonoBehaviour
     public static void SetPlayer(Faction faction)
     {
         ActiveFaction = faction;
-        Debug.Log($"Setting Active Player to {faction.name} from UI_Game"); 
         SetActivePlayerEvent?.Invoke(faction); 
     }
 

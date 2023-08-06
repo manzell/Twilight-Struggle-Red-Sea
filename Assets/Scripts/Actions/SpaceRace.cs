@@ -40,11 +40,11 @@ public class SpaceRace : GameAction, IOpsAction, ICardAction
     public SpaceRace(Faction faction)
     {
         SetActingFaction(faction);
-        spaceStage = Game.current.gameState.SpaceRaceItems.FirstOrDefault(stage => !stage.factions.Contains(faction));
+        spaceStage = Game.current.gameState.SpaceRaceStages.FirstOrDefault(stage => !stage.factions.Contains(faction));
     }
 
     // TODO: Check for Space Race attempts in the current turn
-    public bool Can(Faction faction) => spaceStage != null && Card.Ops.Value(this) >= spaceStage.OpsRequired;
+    public bool Can(Card card) => spaceStage != null && card.Ops.Value(this) >= spaceStage.OpsRequired;
 
     public void SetOps(Stat stat) => Ops = stat;
 }

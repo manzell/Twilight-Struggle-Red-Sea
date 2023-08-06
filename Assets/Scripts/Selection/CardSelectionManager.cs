@@ -9,7 +9,6 @@ public class CardSelectionManager
     public System.Action<Card> CardSelectEvent, CardDeselectEvent;
     public static System.Action<CardSelectionManager> StartCardSelectionEvent, CompleteCardSelectionEvent;
 
-
     public Faction faction { get; private set; }
     public List<Card> Selectable { get; private set; }
     public List<Card> Selected { get; private set; }
@@ -18,6 +17,9 @@ public class CardSelectionManager
 
     public bool CanSubmit => Selected.Count >= minSelect && Selected.Count <= maxSelect; 
     public TaskCompletionSource<CardSelectionManager> Task = new();
+
+    public CardSelectionManager(Faction faction, IEnumerable<Card> selectable, System.Action<Card> OnSelect) : this(faction, selectable) =>
+        CardSelectEvent += OnSelect; 
 
     public CardSelectionManager(Faction faction, IEnumerable<Card> selectable)
     {
@@ -44,7 +46,7 @@ public class CardSelectionManager
         }
     }
 
-    public void Submit()
+    public void Complete()
     {
         if(Selected.Count >= minSelect && Selected.Count <= maxSelect)
             Task.SetResult(this);

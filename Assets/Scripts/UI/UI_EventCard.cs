@@ -4,7 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using Sirenix.OdinInspector; 
 
-public class UI_PlayCard : SerializedMonoBehaviour
+public class UI_EventCard : SerializedMonoBehaviour
 {
     [SerializeField] UI_Card cardPrefab;
     [SerializeField] Dictionary<Faction, Transform> cardPlayAreas;
@@ -13,11 +13,11 @@ public class UI_PlayCard : SerializedMonoBehaviour
 
     private void Awake()
     {
-        PlayCard.StartPlayCardEvent += PrepCard;
-        PlayCard.FinishPlayCardEvent += RemoveCard;
+        Event.StartPlayCardEvent += PrepCard;
+        Event.FinishPlayCardEvent += RemoveCard;
     }
 
-    void PrepCard(PlayCard play)
+    void PrepCard(Event play)
     {
         activeCard = Instantiate(cardPrefab, cardPlayAreas[play.ActingFaction]);
         activeCard.Setup(play.card);
@@ -31,12 +31,12 @@ public class UI_PlayCard : SerializedMonoBehaviour
         activeCard.transform.DOLocalMoveX(0, 1f); 
     }
 
-    void RemoveCard(PlayCard play)
+    void RemoveCard(Event cardEvent)
     {
         activeCard.transform.DOLocalMoveX(
-            cardPlayAreas[play.ActingFaction].position.x < Screen.width / 2 ? -200 : 200, 1f).OnComplete(() => {
+            cardPlayAreas[cardEvent.ActingFaction].position.x < Screen.width / 2 ? -200 : 200, 1f).OnComplete(() => {
                 Destroy(activeCard.gameObject);
-                play.completion.SetResult(play); 
+                cardEvent.completion.SetResult(cardEvent); 
                 }); 
     }
 }

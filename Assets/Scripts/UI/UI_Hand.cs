@@ -48,8 +48,6 @@ public class UI_Hand : SerializedMonoBehaviour
 
     public void OnSetActivePlayer(Faction faction)
     {
-        Debug.Log($"OnSetActivePlayer: Creating 2 Tweens for each of {this.faction.name}'s {hand.Keys.Count(card => !hand[card].drag)} cards");
-
         foreach(Card card in hand.Keys.Where(card => !hand[card].drag))
         {
             hand[card].UI.transform.DORotate(new Vector3(0, faction == this.faction ? 0 : 180f, 0), 1f);

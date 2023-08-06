@@ -23,7 +23,7 @@ public class UI_CardSelectionManager : MonoBehaviour
         float cardWidth = selectableCardPrefab.GetComponent<RectTransform>().sizeDelta.x;
 
         cardSelectionWindow.SetActive(true);
-        SubmitButton.onClick.AddListener(selection.Submit); 
+        SubmitButton.onClick.AddListener(selection.Complete); 
         selection.CardSelectEvent += card => SubmitButton.enabled = selection.CanSubmit;
         selection.CardDeselectEvent += card => SubmitButton.enabled = selection.CanSubmit;
 

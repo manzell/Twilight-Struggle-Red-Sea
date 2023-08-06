@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using System.Linq;
-using UnityEditor;
 
 namespace TwilightStruggle.Cards.RedSea
 { 
@@ -78,6 +77,7 @@ namespace TwilightStruggle.Cards.RedSea
     public class CarterDoctrine : CardAction
     {
         System.Action<Roll> doctrine;
+        ActionSelectionManager selection;
 
         protected override Task Do()
         {
@@ -93,17 +93,17 @@ namespace TwilightStruggle.Cards.RedSea
             if(roll.faction == Card.Faction)
             {
                 // Prompt the player to use the Carter Doctrine
-                ActionSelectionManager selection = new(roll.faction, 
-                    new List<IExecutableAction>() { new SetRoll(roll, 1), new SetRoll(roll, 6), new Pass() });
+                selection = new(roll.faction, 
+                    new List<IExecutableAction>() { new SetRoll(roll, 1), new SetRoll(roll, 6), new Pass() }, null, RemoveCarterDoctrine);
 
-                IExecutableAction action = await selection.selectionTask.Task; 
-
-                if(action is SetRoll setRoll)
-                {
-                    await action.Execute();
-                    Roll.PreRollEvent -= doctrine; 
-                }
+                await selection.selectionTask.Task;         
             }
+        }
+
+        void RemoveCarterDoctrine(IExecutableAction action)
+        {
+            if (action is SetRoll)
+                Roll.PreRollEvent -= doctrine;
         }
 
         public class SetRoll : IExecutableAction
@@ -163,39 +163,37 @@ namespace TwilightStruggle.Cards.RedSea
 
     public class CyrusVance : CardAction
     {
+        // The USSR randomly draws 2 cards from the US hand (or 1 card if only 1 card remains). Discard 1 and return any remaining card.
+        // If the discarded Event is USSR associated, gain 2 VPs. 
         [SerializeField] int CardToDraw, VPaward;
+        CardSelectionManager selection;
 
         protected override async Task Do()
         {
-            List<Card> cards = new(); 
+            List<Card> cards = new();
 
-            for(int i = 0; i < Mathf.Min(CardToDraw, Game.currentState.hands[ActingFaction.Opponent].Count); i++)
+            for (int i = 0; i < Mathf.Min(CardToDraw, Game.currentState.hands[ActingFaction.Opponent].Count); i++)
             {
                 GameState.RemoveCardFromHand remove = new(ActingFaction.Opponent);
                 await remove.Execute();
                 cards.Add(remove.card);
             }
 
-            if (cards.Count > 1)
+            selection = new(ActingFaction, cards, Discard);
+
+            async void Discard(Card card)
             {
-                ActionSelectionManager selection = new(ActingFaction, cards.Select(card => new GameState.Discard(card)));
+                cards.Remove(card);
 
-                GameState.Discard selectedAction = (GameState.Discard)await selection.selectionTask.Task;
-                await selectedAction.Execute();
-
-                if(selectedAction.card.Faction == Card.Faction)
+                if (card.Faction == ActingFaction)
                     await new GameState.AdjustVP(Card.Faction, VPaward).Execute();
 
-                cards.Remove(selectedAction.card);
+                await new GameState.Discard(card).Execute();
 
-                await new GameState.AddCardToHand(cards[0], ActingFaction.Opponent).Execute(); 
-            }
-            if(cards.Count == 1)
-            {
-                await new GameState.Discard(cards[0]).Execute();
+                if (cards.Any())
+                    await new GameState.AddCardToHand(cards.First(), ActingFaction.Opponent).Execute();
 
-                if (cards[0].Faction == Card.Faction)
-                    await new GameState.AdjustVP(Card.Faction, VPaward).Execute(); 
+                selection.Complete();
             }
         }
     }
@@ -211,12 +209,8 @@ namespace TwilightStruggle.Cards.RedSea
             if(kenya.controllingFaction == Card.Faction)
             {
                 await new GameState.AdjustVP(Card.Faction, controlVPAward).Execute(); 
-
-                ActionSelectionManager selection = new ActionSelectionManager(Card.Faction, 
-                    new List<IExecutableAction>() { new GameState.AdjustDEFCON(1), new GameState.AdjustDEFCON(-1) });
-
-                IExecutableAction selectedAction = await selection.selectionTask.Task;
-                await selectedAction.Execute(); 
+                ActionSelectionManager selection = new (Card.Faction, new List<IExecutableAction>() { new GameState.AdjustDEFCON(1), new GameState.AdjustDEFCON(-1) });
+                await selection.selectionTask.Task;
             }
             else
                 await new GameState.AdjustInfluence(ActingFaction, kenya, altAward).Execute();
@@ -235,7 +229,7 @@ namespace TwilightStruggle.Cards.RedSea
 
             CountrySelectionManager selection = new(ActingFaction, ethiopia.Neighbors, this, 
                 null, async sel => await new GameState.AdjustInfluence(ActingFaction, sel.Selected.FirstOrDefault(), 1).Execute());
-            
+
             await selection.task;
         }
     }
@@ -251,12 +245,10 @@ namespace TwilightStruggle.Cards.RedSea
 
             await new GameState.AddEffect(new F35EsEffect()).Execute();
 
-            selection = new(ActingFaction, africanCountries, this,
-                country =>
-                {
-                    new Realign.Attempt(ActingFaction, country).Do();
-                    selection.RemoveSelectable(country);
-                }, null, 0, africanCountries.Count);
+            selection = new(ActingFaction, africanCountries, this, country => {
+                new Realign.Attempt(ActingFaction, country).Do();
+                selection.RemoveSelectable(country);
+            }, null, 0, africanCountries.Count);
 
             selection.selectMultiple = false;
             await selection.task; 
@@ -294,7 +286,7 @@ namespace TwilightStruggle.Cards.RedSea
                 selection.ClearSelectable();
         }
 
-        async Task FamineCoup(CountrySelectionManager sel)
+        async void FamineCoup(CountrySelectionManager sel)
         {
             foreach (CountryData country in sel.Selected)
                 await new GameState.AddEffect(new FamineToken(country)).Execute();
@@ -337,12 +329,12 @@ namespace TwilightStruggle.Cards.RedSea
             {
                 CountryData country;
                 public FamineCondition(CountryData country) => this.country = country;
-                public override bool Can(IContext context) => context is Coup coup && coup.target == country;
+                public override bool Can(IContext context) => context is Coup coup && coup.Target == country;
             }
 
             async void RemoveFamineToken(Coup coup)
             {
-                if (coup.target == country)
+                if (coup.Target == country)
                 {
                     Coup.AfterCoupEvent -= RemoveFamineToken;
                     await new GameState.CancelEffect(this).Execute(); 
@@ -415,7 +407,7 @@ namespace TwilightStruggle.Cards.RedSea
 
         public void DegradeNonBattleground(IExecutableAction action)
         {
-            if (action is Coup coup && coup.target.Battleground == false)
+            if (action is Coup coup && coup.Target.Battleground == false)
                 new GameState.AdjustDEFCON(-1).Execute(); 
         }
 
@@ -523,7 +515,7 @@ namespace TwilightStruggle.Cards.RedSea
 
             if(card != null)
             {
-                PlayCard play = new(ActingFaction, card);
+                Event play = new(ActingFaction, card);
                 Faction previousFaction = card.Faction;
 
                 card.SetFaction(ActingFaction);
@@ -569,24 +561,20 @@ namespace TwilightStruggle.Cards.RedSea
 
         protected override async Task Do()
         {
-            Card discard = null;
+            CardSelectionManager cardSelection = new(ActingFaction, ActingFaction.Hand.Where(card => card.Faction == ActingFaction.Opponent));
+            Card discard = (await cardSelection.Task.Task).Selected.First(); 
 
-            Roll roll = new(ActingFaction); 
-
-            if(roll >= 4)
+            if(discard != null)
             {
-                // Use the ops value to place, coup or realign
-                Coup coup = new(ActingFaction);
-                Realign realign = new(ActingFaction);
-                Place place = new(ActingFaction); 
-                ActionSelectionManager selection = new(ActingFaction, new List<GameAction>() { coup, realign, place, });
+                Roll roll = new(ActingFaction);
 
-                coup.SetOps(discard.Ops);
-                realign.SetOps(discard.Ops);
-                place.SetOps(discard.Ops); 
+                if (roll >= 4)
+                {
+                    ActionSelectionManager selection = new(ActingFaction, 
+                        new List<GameAction>() { new Coup(ActingFaction, discard), new Realign(ActingFaction, discard), new Place(ActingFaction, discard) });
 
-                IExecutableAction selectedAction = await selection.selectionTask.Task;
-                await selectedAction.Execute(); 
+                    await selection.selectionTask.Task;
+                }
             }
         }
     }
@@ -661,13 +649,11 @@ namespace TwilightStruggle.Cards.RedSea
 
             await selection.task; 
 
-            Task AddExtraActionRound(CountrySelectionManager csm)
+            void AddExtraActionRound(CountrySelectionManager csm)
             {
                 ActionRound actionRound = GameObject.Instantiate(actionRoundPrefab, Game.currentState.CurrentTurn.transform);
                 actionRound.SetPhasingFaction(ActingFaction);
                 actionRound.AddAction(new ActionRound.Pass());
-
-                return Task.CompletedTask; 
             }
         }
 
@@ -713,15 +699,11 @@ namespace TwilightStruggle.Cards.RedSea
             IEnumerable<CountryData> targets = Game.currentState.Countries.Where(country => country.Continents.Contains(africa) && country.Influence[ActingFaction.Opponent] != 0);
             int minSelection = Mathf.Clamp(targets.Count(), 0, 1);
 
-            CountrySelectionManager selection = new(ActingFaction, targets, this, null, RemoveUSInfluence, minSelection, 1); 
+            CountrySelectionManager selection = new(ActingFaction, targets, this, 
+                async country => await new GameState.AdjustInfluence(ActingFaction.Opponent, country, -country.Influence[ActingFaction.Opponent]).Execute(), null, 
+                minSelection, 1); 
                 
             await selection.task;
-
-            async Task RemoveUSInfluence(CountrySelectionManager selection)
-            {
-                CountryData country = selection.Selected.First(); 
-                await new GameState.AdjustInfluence(ActingFaction.Opponent, country, -country.Influence[ActingFaction.Opponent]).Execute();
-            }
         }
     }
 
@@ -729,7 +711,7 @@ namespace TwilightStruggle.Cards.RedSea
     {
         // The US must reveal any Scoring cards in the US hand. The USSR may then conduct Operations using this card's Operations value.
         // If the US revealed a Scoring card, 1 must be played on the next US Action Round. 
-        [SerializeField] List<Card> scoringCards; 
+        [SerializeField] List<Card> scoringCards;
 
         protected override async Task Do()
         {
@@ -737,11 +719,9 @@ namespace TwilightStruggle.Cards.RedSea
 
             if (usHeldScoringCards.Count() > 0)
             {
-                ActionSelectionManager selection = new(ActingFaction,
-                    new List<IExecutableAction> { new Coup(ActingFaction, Card), new Realign(ActingFaction), new Place(ActingFaction) });
+                ActionSelectionManager selection = new(ActingFaction, new List<IExecutableAction> { new Coup(ActingFaction, Card), new Realign(ActingFaction, Card), new Place(ActingFaction, Card) });
 
-                IExecutableAction action = await selection.selectionTask.Task;
-                await action.Execute();
+                await selection.selectionTask.Task;
             }
 
             // There is an edge case where under USAID the Soviets can event this in T2 AR7 and US won't be forced to play their card... but if they ho

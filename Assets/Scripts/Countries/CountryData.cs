@@ -15,6 +15,7 @@ public class CountryData : SerializedScriptableObject
     [field: SerializeField] public bool Flashpoint { get; private set; }
     [field: SerializeField] public List<Continent> Continents { get; private set; }
     [field: SerializeField] public List<CountryData> Neighbors { get; private set; }
+    [field: SerializeField] public bool AdjacencyRequired { get; private set; } = true; 
 
     public Faction controllingFaction => Mathf.Abs(Influence.Max(kvp => kvp.Value) - Influence.Min(kvp => kvp.Value)) >= Stability ?
         Influence.OrderByDescending(kvp => kvp.Value).First().Key : null;

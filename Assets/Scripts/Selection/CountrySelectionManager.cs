@@ -11,6 +11,7 @@ public class CountrySelectionManager
     public static System.Action<CountrySelectionManager> StartSelectEvent, CompleteSelectEvent;
     public System.Action<CountryData> AddSelectableEvent, RemoveSelectableEvent;
     public System.Action<CountryData> SelectCountryEvent, DeselectCountryEvent;
+    public System.Action<CountrySelectionManager> startSelectEvent, completeSelectEvent;
 
     public Task<CountrySelectionManager> task => Task.Task;
     public List<CountryData> Selectable { get; private set; } = new();
@@ -22,15 +23,14 @@ public class CountrySelectionManager
     public int maxPerCountry = 99;
     public bool selectMultiple = true;
 
-    System.Func<CountrySelectionManager, Task> completeFunc;
     TaskCompletionSource<CountrySelectionManager> Task = new();
 
     public CountrySelectionManager(Faction faction, IEnumerable<CountryData> eligibleCountries, IExecutableAction context,
-        System.Action<CountryData> onSelect, System.Func<CountrySelectionManager, Task> onComplete, int min = 0, int max = 1, int maxPer = 99)
+        System.Action<CountryData> onSelect, System.Action<CountrySelectionManager> onComplete, int min = 0, int max = 1, int maxPer = 99)
     {
         SelectCountryEvent += onSelect;
-        DeselectCountryEvent += onSelect; 
-        completeFunc = onComplete;
+        DeselectCountryEvent += onSelect;
+        completeSelectEvent += onComplete; 
         minSelectable = min;
         maxSelectable = max;
         maxPerCountry = maxPer; 
@@ -42,13 +42,10 @@ public class CountrySelectionManager
 
     void Setup(Faction faction, IEnumerable<CountryData> eligibleCountries, IExecutableAction context)
     {
-        UI_Notification.SetNotification($"Country Selection: {faction.name} Select from {string.Join(", ", eligibleCountries.Select(country => country.name))}"); 
-
         this.faction = faction;
 
         StartSelectEvent?.Invoke(this);
         SetSelectable(eligibleCountries);
-
     }
 
     public void TrySelect(CountryData country)
@@ -76,8 +73,6 @@ public class CountrySelectionManager
         IEnumerable<CountryData> toRemove = Selectable.Where(country => !countries.Contains(country));
         IEnumerable<CountryData> toAdd = countries.Where(country => !Selectable.Contains(country));
 
-        //Debug.Log($"Country Selection: Adding {string.Join(", ", toAdd.Select(country => country.name))} to selection");
-
         if (toRemove.Count() > 0)
             RemoveSelectable(toRemove);
         if(toAdd.Count() > 0)
@@ -98,21 +93,20 @@ public class CountrySelectionManager
     {
         if(!Selectable.Contains(country))
         {
-            //Debug.Log($"Adding Selectable {country.name}");
             Selectable.Add(country); 
             AddSelectableEvent?.Invoke(country);
         }
     }
 
-    public async void Complete()
+    public void Complete()
     {
         if(Selected.Count() >= minSelectable)
         {
             ClearSelectable();
-            UI_Notification.ClearNotification(); 
+            UI_Notification.ClearNotification();
 
-            CompleteSelectEvent?.Invoke(this); 
-            await completeFunc?.Invoke(this);
+            completeSelectEvent?.Invoke(this);
+            CompleteSelectEvent?.Invoke(this);
 
             Task.SetResult(this);
         }

@@ -4,11 +4,10 @@ using System.Threading.Tasks;
 using UnityEngine;
 using System.Linq;
 using UnityEditor;
-using static Realign;
 
 public class Place : GameAction, IOpsAction
 {
-    [field: SerializeField] public List<Calculation<List<CountryData>>> targetRules { get; private set; } = new() { new StandardPlacementTargets() };
+    [field: SerializeField] public List<StandardPlacementTargets> targetRules { get; private set; } = new() { new StandardPlacementTargets() };
     public List<Placement> placements { get; private set; }
     public List<Modifier> Modifiers { get; private set; }
     public TaskCompletionSource<CountryData> placementTask { get; private set; }
@@ -16,44 +15,47 @@ public class Place : GameAction, IOpsAction
     [field: SerializeField] public Stat Ops { get; private set; }
     public int OpsUsed { get; private set; }
 
-    public void SetOps(Stat stat) => Ops = stat; 
+    public void SetOps(Stat stat) => Ops = stat;
 
-    public Place(Faction faction) => SetActingFaction(faction);
+    public Place(Faction faction) => SetActingFaction(faction); 
+    public Place(Faction faction, Card card) : this(faction) => SetOps(card.Ops);
 
     protected override async Task Do()
     {
         placements = new();
 
-        UI_Notification.SetNotification($"Choose a country to place influence. {Ops.Value(this) - placements.Sum(placement => placement.Ops.Value(this))} Ops remaining.");
+        UI_Notification.SetNotification($"Choose a country to place influence. {Ops.Value(this) - placements.Sum(placement => placement.OpCost.Value(this))} Ops remaining.");
 
-        selection = new(ActingFaction, targetRules.Select(rule => rule.Value()).Aggregate((first, next) => first.Intersect(next).ToList()), this,
-            AttemptPlacement, null, 0, Ops.Value(this));
+        selection = new(ActingFaction, targetRules.Select(rule =>  rule.Value(ActingFaction))
+            .Aggregate((first, next) => first.Intersect(next).ToList()), this, AttemptPlacement, null, 0, Ops.Value(this));
+
+        await selection.task;
 
         void AttemptPlacement(CountryData country)
         {
             Placement placement = new Placement(ActingFaction, country);
             placements.Add(placement);
-            placement.Do();
 
-            if (Ops.Value(this) > placements.Sum(placement => placement.Ops.Value(this)))
-                UI_Notification.SetNotification($"Choose a country to place influence. {Ops.Value(this) - placements.Sum(placement => placement.Ops.Value(this))} Ops remaining.");
-            else
-                selection.Complete(); 
+            if (Ops.Value(this) > placements.Sum(placement => placement.OpCost.Value(this)))
+                UI_Notification.SetNotification($"Choose a country to place influence. {Ops.Value(this) - placements.Sum(placement => placement.OpCost.Value(this))} Ops remaining.");
+            if (Ops.Value(this) >= placements.Sum(placement => placement.OpCost.Value(this)))
+                placement.Do();
+            else 
+                placements.Remove(placement); 
         }
-
-        await selection.task;
     }
 
     public class Placement
     {   
-        public Stat Ops { get; private set; }
+        public Stat OpCost { get; private set; }
         public Faction faction { get; private set; }
         public CountryData country { get; private set; }
 
         public Placement(Faction faction, CountryData country)
         {
             this.country = country; 
-            Ops = new(country.controllingFaction == faction.Opponent ? 2 : 1); 
+            this.faction = faction;
+            OpCost = new(country.controllingFaction == faction.Opponent ? 2 : 1); 
         }
 
         public void Do() => new GameState.AdjustInfluence(faction, country, 1).Execute(); 

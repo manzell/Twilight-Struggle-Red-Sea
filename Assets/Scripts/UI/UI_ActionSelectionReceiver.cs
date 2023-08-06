@@ -6,20 +6,19 @@ using TMPro;
 using System.Linq;
 using UnityEngine.UI; 
 
-public class UI_ActionSelectionReceiver : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
+public class UI_ActionSelectionReceiver : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     IExecutableAction action;
     UI_ActionSelection uiSelectionWindow;
     [SerializeField] TextMeshProUGUI actionName;
     Image backgroundImage;
-    Outline outline; 
+    Color previousColor = Color.white; 
 
     public Faction Faction => uiSelectionWindow.Faction; 
 
     public void Setup(IExecutableAction action, UI_ActionSelection uiSelection)
     {
         backgroundImage = GetComponent<Image>();
-        outline = GetComponent<Outline>();
 
         this.action = action;
         uiSelectionWindow = uiSelection;
@@ -31,36 +30,38 @@ public class UI_ActionSelectionReceiver : MonoBehaviour, IDropHandler, IPointerE
 
     public void OnDrop(PointerEventData eventData)
     {
-        Debug.Log($"{action} {UI_Game.ActiveFaction} {eventData.selectedObject}");  
-        Debug.Log($"{action is IOpsAction} {UI_Game.ActiveFaction == Faction} {eventData.selectedObject.GetComponent<IDraggableCard>() != null}"); 
-
-        if (action is IOpsAction opsAction && UI_Game.ActiveFaction == Faction && eventData.selectedObject.TryGetComponent(out IDraggableCard ui))
+        if (UI_Game.ActiveFaction == Faction && eventData.selectedObject.TryGetComponent(out IDraggableCard ui))
         {
-            Debug.Log($"{UI_Game.ActiveFaction} plays {ui.Card.name} for {action}");
-
             new GameState.RemoveCardFromHand(Faction, ui.Card).Execute();
             Destroy(eventData.selectedObject);
 
-            opsAction.SetOps(ui.Card.Ops); 
             uiSelectionWindow.Select(action, ui.Card); 
         }
     }
 
-    Color previousColor = Color.white; 
-
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if(eventData.selectedObject.TryGetComponent(out IDraggableCard ui))
-        {
-            previousColor = backgroundImage.color; 
+        previousColor = backgroundImage.color;
 
-            if(action is GameAction gameAction)
-                backgroundImage.color = gameAction.Can() ? Color.yellow : Color.red;
+        if (action is ICardAction cardAction)
+        { 
+            if(eventData.selectedObject != null && eventData.selectedObject.TryGetComponent(out UI_DraggableCard uiCard))
+                backgroundImage.color = cardAction.Can(uiCard.Card) ? Color.yellow : Color.red;
+            else if(uiSelectionWindow.actionSelectionManager.card != null)
+                backgroundImage.color = cardAction.Can(uiSelectionWindow.actionSelectionManager.card) ? Color.yellow : Color.red;
         }
+        else
+            backgroundImage.color = Color.yellow;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         backgroundImage.color = previousColor;
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (UI_Game.ActiveFaction == Faction)
+            uiSelectionWindow.Select(action, uiSelectionWindow.actionSelectionManager.card);
     }
 }

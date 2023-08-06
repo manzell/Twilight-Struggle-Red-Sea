@@ -38,7 +38,8 @@ public interface IExecutableAction : IContext
 public interface ICardAction : IActingPlayerAction
 {
     public Card Card { get; }
-    public void SetCard(Card card); 
+    public void SetCard(Card card);
+    public bool Can(Card card);
 }
 
 public interface IOpsAction : IActingPlayerAction
@@ -59,4 +60,6 @@ public abstract class CardAction : GameAction, ICardAction
         Debug.Log($"> {Card.name}: {Card.CardText}"); 
         return base.Execute();
     }
+
+    public virtual bool Can(Card card) => true; 
 }

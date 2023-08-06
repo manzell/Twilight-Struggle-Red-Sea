@@ -6,47 +6,71 @@ using System.Threading.Tasks;
 
 public class ActionRound : Phase
 {
-    public Faction phasingFaction { get; private set; }
-    public IExecutableAction playedAction { get; private set; }
     [SerializeField] List<GameAction> defaultActions;
+
+    public Card playedCard { get; private set; }
+    public IExecutableAction playedAction { get; private set; }
+    public Faction phasingFaction { get; private set; }
 
     public void SetPhasingFaction(Faction faction) => phasingFaction = faction;
     public void SetActions(List<GameAction> actions) => defaultActions = actions;
-    public void AddAction(GameAction action) => defaultActions.Add(action); 
+    public void AddAction(GameAction action) => defaultActions.Add(action);
+
+    ActionSelectionManager selection;
 
     protected override async void OnPhase()
     {
+        List<IExecutableAction> triggeredActions = new(); 
+
         await new GameState.SetPhasingPlayer(phasingFaction).Execute();
 
-        string notification = $"Play {phasingFaction.name} Action Round"; 
-        UI_Notification.SetNotification(notification);
+        UI_Notification.SetNotification($"Play {phasingFaction.name} Action Round");
 
-        ActionSelectionManager selection = new(phasingFaction, defaultActions); 
-        
-        UI_Notification.ClearNotification(notification);
+        selection = new(phasingFaction, defaultActions, null, AfterSelection);
 
-        playedAction = await selection.selectionTask.Task; 
+        await selection.selectionTask.Task;
 
-        selection.AvailableActions.Remove(playedAction);
-        selection.AvailableActions.Remove(defaultActions.OfType<SpaceRace>().FirstOrDefault());
+        UI_Notification.ClearNotification();
 
-        // Trigger Opponent's Event if it hasn't been already
-        if (playedAction is not SpaceRace && selection.card.Faction == phasingFaction.Opponent)
+        async void AfterSelection(IExecutableAction action)
         {
-            PlayCard playCardEvent = selection.AvailableActions.OfType<PlayCard>().FirstOrDefault(); 
+            playedCard = selection.card; 
 
-            // We HAVE NOT triggered the action
-            if (playCardEvent != null)
+            triggeredActions.Add(action);
+            selection.AvailableActions.Remove(action);
+            selection.AvailableActions.Remove(defaultActions.OfType<SpaceRace>().FirstOrDefault());
+
+            bool cardIsUnfriendly = selection.card.Faction == selection.faction.Opponent;
+            bool cardEvented = !selection.AvailableActions.OfType<Event>().Any();
+            bool isCardEvent = action is Event;
+
+            if(!cardIsUnfriendly || action is SpaceRace)
             {
-                Debug.Log("Triggering Opponent's Event");
-                playCardEvent.SetCard(selection.card);
-                await playCardEvent.Execute(); 
+                EndPhase(); 
             }
-            else // If we triggered the action already, the PlayCard action will be gone, meaning 
+            else if(!isCardEvent && !cardEvented)
             {
+                Debug.Log($"Card was not Evented, so automatically eventing {selection.card.name}");                    
+                await new Event(selection.faction, selection.card).Execute();
+
+                EndPhase(); 
+            }
+            else
+            {
+                Card card = selection.card;
+
+                UI_Game.SetPlayer(selection.faction);
+                UI_Notification.SetNotification($"{selection.faction} choose use for Ops");
+
                 selection = new(phasingFaction, selection.AvailableActions);
-                playedAction = await selection.selectionTask.Task;
+                selection.SetCard(card);
+                selection.Open();
+ 
+                await selection.selectionTask.Task;
+
+                EndPhase(); 
             }
+
         }
     }
 

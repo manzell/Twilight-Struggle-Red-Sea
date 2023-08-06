@@ -9,24 +9,18 @@ public abstract class Calculation<T>
     public abstract T Value();
 }
 
-public class StandardPlacementTargets : Calculation<List<CountryData>>
+public class StandardPlacementTargets 
 {
-    [field: SerializeField] public Faction faction { get; private set; }
-    [SerializeField] CountryData strategicSeaLanes;
-
-    public override List<CountryData> Value() => new(Game.currentState.Countries
-        .Where(country => country == strategicSeaLanes || country.Influence[faction] > 0 || country.Neighbors.Any(neighbor => neighbor.Influence[faction] > 0)));
-
-    public void SetFaction(Faction faction) => this.faction = faction; 
+    public List<CountryData> Value(Faction faction) => new(Game.currentState.Countries
+            .Where(country => !country.AdjacencyRequired || country.Influence[faction] > 0 || country.Neighbors.Any(neighbor => neighbor.Influence[faction] > 0)));
 }
 
 public class StandardRealignTargets : Calculation<List<CountryData>>
 {
     [field: SerializeField] public Faction faction { get; private set; }
-    [SerializeField] CountryData strategicSeaLanes;
 
     public override List<CountryData> Value() => new(Game.currentState.Countries
-        .Where(country => country != strategicSeaLanes && country.Influence[faction.Opponent] > 0 
+        .Where(country => country.name != "Strategic Sea Lanes" && country.Influence[faction.Opponent] > 0 
             && Game.current.gameState.defcon > country.Continents.Min(continent => continent.DefconRequirement)));
 
     public void SetFaction(Faction faction) => this.faction = faction;
@@ -44,7 +38,7 @@ public class NextSpaceStage : Calculation<SpaceStage>
     [SerializeField] Faction faction;
     public NextSpaceStage(Faction faction) => this.faction = faction;
 
-    public override SpaceStage Value() => Game.current.gameState.SpaceRaceItems.FirstOrDefault(stage => !stage.factions.Contains(faction));
+    public override SpaceStage Value() => Game.current.gameState.SpaceRaceStages.FirstOrDefault(stage => !stage.factions.Contains(faction));
 }
 
 public class CountryList : Calculation<List<CountryData>>

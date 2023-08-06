@@ -16,6 +16,7 @@ public class Realign : GameAction, IOpsAction
     public void SetOps(Stat stat) => Ops = stat;
 
     public Realign(Faction faction) => SetActingFaction(faction);
+    public Realign(Faction faction, Card card) : this(faction) => SetOps(card.Ops); 
 
     protected override async Task Do()
     {

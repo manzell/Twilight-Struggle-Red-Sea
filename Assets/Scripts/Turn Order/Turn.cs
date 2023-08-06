@@ -7,6 +7,15 @@ public class Turn : Phase
     public CreateActionRounds CreateActionRoundsRule;
     [SerializeField] ActionRound actionRoundPrefab;
 
-    public void CreateActionRounds() => CreateActionRoundsRule.Do(this, actionRoundPrefab);
+    protected override void OnPhase()
+    {
+        CreateActionRoundsRule.Do(this, actionRoundPrefab);
+        new GameState.StartPhase(transform.parent.GetComponentInChildren<ActionRound>()).Execute();
+    }
 
+    public override void EndPhase()
+    {
+
+        base.EndPhase();
+    }
 }
